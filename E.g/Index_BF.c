@@ -10,13 +10,13 @@ typedef struct mystring{
     int length;
 }string;
 Status StrAssign(string* str,const char* chars){
-    int i=0;
+     int i=0;
     str->ch[0]='\0';
-    for(i=0;chars[i]!='\0';++i)
-        str->ch[i+1]=chars[i];
+    while(chars[i]!='\0')
+    str->ch[++i]=chars[i];
     str->length=i;
     while(i<MAXLEN)
-        str->ch[i+1]='\0';
+    str->ch[i]!='\0';
     return TRUE;
 }
 int Index_BP(string* S,string* T,int pos){
