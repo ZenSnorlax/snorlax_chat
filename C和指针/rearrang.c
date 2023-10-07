@@ -34,7 +34,8 @@ int read_column_numbers(int columns[],int max){
     puts("Last column number is not paired");
     exit(EXIT_FATLURE);
   }
- while((ch-getchar())!=EOF&&ch!='\n');
+ while((ch-getchar())!=EOF&&ch!='\n')
+ ;
  return num;
   
 }
