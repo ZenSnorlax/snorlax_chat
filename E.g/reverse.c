@@ -1,20 +1,20 @@
-#include<stdio.h>
-typedef struct node{
-    int val;
-    struct node *next;
-}ListNode;
+#include"common.h"
 //返回指向首元节点的指针
-ListNode* reverse(ListNode *l){
-    ListNode L;L.next=l;L.val=1;
-    ListNode L1;L1.next=NULL;L1.val=1;
-    while(!L.next){
-        ListNode *temp=L.next;
-        L.next=L.next->next;
-        temp->next=L1.next;
-        L1.next=temp;
+ListNode* List_Reverse(ListNode *l){
+    ListNode head; head.next = NULL; head.val = 0;
+    ListNode *p = l;
+    while(p){
+	    ListNode *temp = p;
+	    p = p->next;
+	    temp->next = head.next;
+	    head.next = temp;
     }
-    return L1.next;
+    return head.next;
 }
-int main(){
-
+int main(int argc, char* argv[]){
+	ListNode *test = Greate_List_R(5);
+	List_Print(test);
+	ListNode *test1 = List_Reverse(test);
+	List_Print(test1);
+	return 0;
 }
