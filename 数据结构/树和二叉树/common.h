@@ -4,28 +4,28 @@ typedef struct TreeNode{
 	struct TreeNode *r, *l;
 }TreeNode;
 //先序遍历
-void TraversingTree_MLR(TreeNode *root){
+void traversing_tree_mlr(TreeNode *root){
 	if(!root) return;
 	printf("%d \n", root->date);
-	TraversingTree_MLR(root->l);
-	TraversingTree_MLR(root->r);
+	traversing_tree_mlr(root->l);
+	traversing_tree_mlr(root->r);
 }
 //中序遍历
-void TraversingTree_LMR(TreeNode *root){
+void traversing_tree_lmr(TreeNode *root){
 	if(!root) return;
-	TraversingTree_LMR(root->l);
+	traversingtree_lmr(root->l);
 	printf("%d \n", root->date);
-	TraversingTree_LMR(root->r);
+	traversing_tree_lmr(root->r);
 }
 //后序遍历
-void TraversingTree_LRM(TreeNode *root){
+void traversing_tree_lrm(TreeNode *root){
 	if(!root) return;
-	Traversing_LRM(root->l);
-	Traversing_LRM(root->r);
+	traversing_tree_lrm(root->l);
+	traversing_tree_lrm(root->r);
 	printf("%d \n", root->date);
 }
 //先序构造二叉树
-void CreateTree_MLR(TreeNode *root){
+void create_tree_mlr(TreeNode *root){
 	char ch;
 	scanf("%c", &ch);
 	if (ch == '#') {
@@ -36,14 +36,14 @@ void CreateTree_MLR(TreeNode *root){
 		root->date = ch;
 		root->l = (TreeNode *)malloc(sizeof(TreeNode));
 		if (!root->l) exit(1);
-		GreateTree_MLR(root->l);
+		create_tree_mlr(root->l);
 		root->r = (TreeNode *)malloc(sizeof(TreeNode));
 		if (!root->r) exit(1);
-		GreateTree_MLR(root->r);
+		create_tree_mlr(root->r);
 	}
 }
 //中序构造二叉树
-void GreateTree_LMR(TreeNode *root){
+void create_tree_lmr(TreeNode *root){
 	char ch;
 	scanf("%c", &ch);
 	if (ch == '#') {
@@ -53,15 +53,15 @@ void GreateTree_LMR(TreeNode *root){
 	else {	
 		root->l = (TreeNode *)malloc(sizeof(TreeNode));
 		if (!root->l) exit(1);
-		GeateTree_LMR(root->l);
+		create_tree_lmr(root->l);
 		root->date = ch;
 		root->r = (TreeNode *)malloc(sizeof(TreeNode));
 		if (!root->r) exit(1);
-		GreateTree_LMR(root->r);
+		create_tree_lmr(root->r);
 	}
 }
 //后序构造二叉树
-void Greate_LRM(TreeNode *root){
+void create_tree_lrm(TreeNode *root){
 	char ch;
 	scanf("%c", &ch);
 	if (ch == '#') {
@@ -71,10 +71,10 @@ void Greate_LRM(TreeNode *root){
 	else {	
 		root->l = (TreeNode *)malloc(sizeof(TreeNode));
 		if (!root->l) exit(1);
-		GreateTree_LRM(root->l);
+		create_tree_lrm(root->l);
 		root->r = (TreeNode *)malloc(sizeof(TreeNode));
 		if(!root->r) exit(1);
-		GreateTree_LRM(root->r);
+	    create_tree_lrm(root->r);
 		root->date = ch;
              }
 }
