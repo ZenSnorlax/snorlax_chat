@@ -15,7 +15,7 @@ void stack_link_push(StackNode **pstk, int e){
     *pstk = p;
 }
 int stack_link_pop(StackNode **stk){
-    if (stk == NULL) exit(OVERFLOW);
+    if (*stk == NULL) exit(OVERFLOW);
     StackNode *p = *stk;
     *stk = (*stk)->next;
     return p->date;
