@@ -9,6 +9,7 @@ typedef struct huffman
 void CreateHuffmanTree(HuffmanTree *HT, int n);
 int main(int argc, char *argv[])
 {
+
 }
 void CreateHuffmanTree(HuffmanTree *HT, int n)
 {
