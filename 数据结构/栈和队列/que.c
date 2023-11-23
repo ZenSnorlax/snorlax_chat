@@ -11,7 +11,7 @@ int main(int argc, char *argv[]){
     int value = queue_out(&queue);
     printf("对首元素: %d\n", value);
     printQueue(&queue);
-    return 0;
+  
 }
 void createQueue(Queue *que, int n){
     printf("输入%d个数据: ", n);
