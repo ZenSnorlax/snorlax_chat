@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 void InitTreeNode(TreeNode **p)
 {
 
-    TreeNode *ptr = p;
+    TreeNode *ptr = *p;
     ptr = (TreeNode *)malloc(sizeof(TreeNode));
     ptr->LTag = '0';
     ptr->RTag = '0';
