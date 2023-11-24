@@ -1,10 +1,10 @@
 #include<stdio.h>
 #include<stdlib.h>
-typedef struct HuffmanTree{
+typedef struct huffmanTree{
 int parent;
 int lchild, rchild;
 int weight;
-}HTNode, *HuffmanTree;
+} HTNode, *HuffmanTree;
 void InitHuffmanTree(HuffmanTree *HT, int n){
 	for (int i = 1; i < 2 * n; ++i){
 		(*HT)[i].parent = 0;
@@ -34,7 +34,7 @@ void CreateHuffmanTree(HuffmanTree *HT, int n){
 	int m = 2 * n -1;
 	(*HT) = (HTNode *)malloc(sizeof(HTNode) * (m + 1));
 	InitHuffmanTree(HT, n);
-	for (int i = n + 1; i < m; ++i){
+	for (int i = n + 1; i <= m; ++i){
 		int rchild, lchild;
 		Select(HT, &lchild, i - 1);
 		(*HT)[i].lchild = lchild;
