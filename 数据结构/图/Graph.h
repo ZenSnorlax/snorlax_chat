@@ -7,3 +7,10 @@ typedef struct{
 	ArcType arcs[MVNum][MVNum];
 	int vexnum, arcnum;
 }AMGraph;
+int main (int argc, char *argv[]) {
+	
+	return 0;
+}
+
+	
+
