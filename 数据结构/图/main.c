@@ -1,5 +1,4 @@
 #include<stdio.h>
-#include<stdlib.h>
 #define MVNum 100
 #define MaxInt 32767
 
@@ -16,7 +15,7 @@ typedef enum {
 typedef char VerTexType;
 typedef int ArcType;
 
-typedef struct {
+typedef struct AMGraph{
     VerTexType vexs[MVNum];
     ArcType arcs[MVNum][MVNum];
     int vexnum, arcnum;
@@ -32,7 +31,7 @@ int LocateVex(const AMGraph* G, const char value) {
 
 //初始化
 void Init(AMGraph* G) {
-    scanf("%d%d", G->vexnum, G->arcnum); //输入顶点数, 边数
+    scanf("%d%d", &G->vexnum, &G->arcnum); //输入顶点数, 边数
     for (int i = 0; i < G->vexnum; ++i)
         G->vexs[i] = getchar();
     getchar(); //吸收换行
@@ -78,6 +77,7 @@ void ShortestPath_DIJ(const AMGraph* G, const int v0) {
     bool S[n];
     int Path[n];
     int D[n];
+
     for (int v = 0; v < n; ++v) {
         S[v] = false;
         D[v] = G->arcs[v0][v];
@@ -121,7 +121,7 @@ void ShortestPath_Floyd(const AMGraph* G) {
         for (int i = 0; i < n; ++i)
             for (int j = 0; j < n; ++j)
                 if (D[i][k] + D[k][j] < D[i][j]) {
-                    D[i][j] = D[i][k] + D[k][j];
+			                    D[i][j] = D[i][k] + D[k][j];
                     Path[i][j] = Path[k][j];
                 }
 }
@@ -129,3 +129,4 @@ void ShortestPath_Floyd(const AMGraph* G) {
 int main() {
     return 0;
 }
+
