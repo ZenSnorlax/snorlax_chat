@@ -54,4 +54,5 @@ void CreateDN(ALGraph *G){
 		p1->nextarc=G->vertices[i].firstarc;
 		G->vertices[i].firstarc=p1;
 	}
+	
 }
