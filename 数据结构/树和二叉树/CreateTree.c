@@ -45,3 +45,6 @@ void PosOrderTraverse(TreeNode *root){
 	PreOrderTraverse(root->rchild);
 	putchar(root->data);
 }
+int main(){
+
+}
