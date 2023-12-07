@@ -9,5 +9,5 @@ typedef struct AMGraph{
 	ArcType arcs[MVNum][MVNum];
 	int vexnum, arcnum;
 }AMGraph;
-
+void CreateUDN(AMGraph *G);
 #endif // !HEADER

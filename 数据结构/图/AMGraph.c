@@ -28,11 +28,11 @@ void CreateUDN(AMGraph *G){
 		const VerTexType v2 = getchar();
 		const int j = Locate(v2, G);
 		getchar();	//吸收回车
+		printf("输入权值:");
+		scanf("%d", &G->arcs[i][j]);
+		getchar();//吸收回车
+		G->arcs[j][i] = G->arcs[i][j];
 	}
 	printf("已建立\n");
 }
-int main() {
-	AMGraph AG;
-	CreateUDN(&AG);
-	return 0;
-}
+
