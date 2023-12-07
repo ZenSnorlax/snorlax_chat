@@ -1,3 +1,5 @@
-main: AMGraph.c traverse_dfs.c 
-	gcc -o main AMGraph.c traverse_dfs.c
-	
+traverse_dfs: AMGraph.c traverse_dfs.c 
+	gcc -o traverse_dfs AMGraph.c traverse_dfs.c
+#traverse_bfs: AMGraph.c traverse_bfs.c 
+#	gcc -o traverse_bfs AMGraph.c traverse_bfs.c
+

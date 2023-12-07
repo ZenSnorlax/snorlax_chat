@@ -10,10 +10,16 @@ void dfs_traverse(const AMGraph *G, const int v) {
 			dfs_traverse(G, i);
 
 }
+void DFS(AMGraph *G){
+	for (int v = 0; v < G->vexnum; ++v)
+		visited[v] = false;
+	for (int v = 0; v < G->vexnum; ++v)
+		if(!visited[v])
+			dfs_traverse(G, v);
+}
 int main() {
 	AMGraph AG;
-	for (int i = 0; i < AG.vexnum; ++i)
-		visited[i] = false;
 	CreateUDN(&AG);
-	dfs_traverse(&AG, 0);
+	DFS(&AG);
+	return ;
 }
