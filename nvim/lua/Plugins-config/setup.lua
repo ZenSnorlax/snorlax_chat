@@ -19,7 +19,7 @@ require("mason-lspconfig").setup({
     --"tailwindcss",
     "bashls",
     --"cssls",
-    "dockerls",
+    --"dockerls",
     "emmet_ls",
     "html",
     "jsonls",

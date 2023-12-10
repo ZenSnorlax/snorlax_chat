@@ -1,3 +1,2 @@
-local M = {'akinsho/toggleterm.nvim', version = "*", config = true}
-    
-  return { M }
+local M ={'akinsho/toggleterm.nvim', version = "*", opts = {--[[ things you want to change go here]]}}
+return { M }
