@@ -10,7 +10,7 @@ typedef struct AMGraph{
 	int vexnum, arcnum;
 }AMGraph;
 struct ALGraph{
-	
+
 };
 void CreateUDN(AMGraph *G);
 #endif // !HEADER
