@@ -4,34 +4,33 @@
 
 #ifndef MAP_H
 #define MAP_H
-#include<string>
-#include<vector>
+#include <string>
+#include <vector>
 #define MaxInt 32765
 using namespace std;
 
 class Map {
-public:
-    Map();
+	public:
+		Map();
 
-    void CreateDN();
+		void CreateDN();
 
-    void shortest_point(const string&);
+		void shortest_point(const string &);
 
-    void shortest_point(const string&, const string&);
-    void fwrite();
-    void fread();
+		void shortest_point(const string &, const string &);
+		void fwrite();
+		void fread();
 
-private:
-    vector<string> vex;
-    vector<vector<int>> arc;
-    int vexnum;
-    int arcnum;
+	private:
+		vector<string> vex;
+		vector<vector<int>> arc;
+		int vexnum;
+		int arcnum;
 
-    vector<int> ShortestPath(const string&);
+		vector<int> ShortestPath(const string &);
 
-    int LocateInt(const string&);
-    int locateint(const string&);
+		int LocateInt(const string &);
+		int locateint(const string &);
 };
 
-#endif //MAP_H
-
+#endif // MAP_H
