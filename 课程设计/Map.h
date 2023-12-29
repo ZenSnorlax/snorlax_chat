@@ -20,6 +20,7 @@ class Map {
 		void shortest_point(const string &, const string &);
 		void fwrite();
 		void fread();
+		void fclear();
 
 	private:
 		vector<string> vex;
@@ -31,6 +32,7 @@ class Map {
 
 		int LocateInt(const string &);
 		int locateint(const string &);
+
 };
 
 #endif // MAP_H

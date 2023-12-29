@@ -16,9 +16,9 @@ Map::Map() : vex(100, ""), arc(100, vector<int>(100, MaxInt)) {
 
 void Map::CreateDN() {
 	cout << "输入总城市" << endl;
-	cin >> vexnum;
+	scanf("%d", &vexnum);
 	cout << "输入总路线" << endl;
-	cin >> arcnum;
+	scanf("%d", &arcnum);
 	cout << "输入顶点参数" << endl;
 	cout << "例如 地点名 地点名 距离" << endl;
 	for (int i = 0; i < arcnum; ++i) {
@@ -38,7 +38,9 @@ void Map::CreateDN() {
 			cin >> vex[i];
 		}
 	}
+
 }
+
 
 void Map::shortest_point(const string &v) {
 	vector<int> path = ShortestPath(v);
@@ -48,7 +50,7 @@ void Map::shortest_point(const string &v) {
 			continue;
 		int j = i;
 		if (path[j] == -1)
-			cout <<vex[j]<< "不能到达" << endl;
+			cout << vex[j] << "不能到达" << endl;
 		else {
 			while (j != index) {
 				cout << vex[j] << "<-";
@@ -60,14 +62,17 @@ void Map::shortest_point(const string &v) {
 }
 
 void Map::shortest_point(const string &vb, const string &ve) {
-	if (vb == ve)
+	if (vb == ve) {
+		cout << "起点和终点相同，无需计算最短路径。" << endl;
+
 		return;
-	;
+	}
+
 	vector<int> path = ShortestPath(vb);
 	int b = LocateInt(vb);
 	int e = LocateInt(ve);
 	if (path[e] == -1) {
-		cout <<ve<< "不能到达" << endl;
+		cout << ve << "不能到达" << endl;
 	} else {
 		int j = e;
 		while (j != b) {
@@ -120,11 +125,8 @@ int Map::LocateInt(const string &v) {
 
 void Map::fwrite() {
 	ofstream test_write;
-	test_write.open("test.csv");
-	if (!test_write.is_open()) {
-		cout << "未成功打开文件" << endl;
-		return;
-	}
+	test_write.open("test.csv", ios::out);
+	assert(test_write.is_open());	
 	test_write.clear();
 	for (int i = 0; i < vexnum; ++i) {
 		for (int j = 0; j < vexnum; ++j) {
@@ -175,4 +177,10 @@ int Map::locateint(const string &v) {
 	++vexnum;
 	vex[i] = v;
 	return i;
+}
+void Map::fclear() {
+	ofstream file;
+	file.open("test.csv");
+	file.clear();
+	file.close();
 }
