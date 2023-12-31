@@ -5,13 +5,18 @@ lua require("Plugins-config/treesitter")
 lua require("Plugins-config/setup")
 lua require("Plugins-config/cmp")
 lua --require("Plugins-config/trouble")
-lua require("Plugins-config/dashboard")
+lua --require("Plugins-config/dashboard")
 lua require("Plugins-config/lsp-config")
-
-lua require("Plugins-config/util")
+lua --require("Plugins-config/indent-blank")
+lua --require("Plugins-config/util")
 lua require("Plugins-config/c")
 lua --require("Plugins-config/trouble")
-colorscheme gruvbox
+lua require("Plugins-config/format")
+lua require("Plugins-config/cpp")
+lua require("Plugins-config/python")
+lua require("Plugins-config/rust")
+
+colorscheme tokyonight-storm
 
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
