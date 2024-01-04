@@ -13,7 +13,8 @@ int main(int argc, char *argv[]){
 	printQueue(&queue);
 
 }
-void createQueue(Queue *que, int n){
+void createQueue(Queue *que, int n)
+{
 	printf("输入%d个数据: ", n);
 	for(int i = 0;i < n; i++){
 		int value;
@@ -30,4 +31,3 @@ void printQueue(Queue *que){
 	}
 	printf("\n");
 }
-

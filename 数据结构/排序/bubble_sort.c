@@ -1,7 +1,8 @@
 #include <stdio.h>
 int Move; // 移动次数
 int Comp; // 比较次数
-void bubble_sort(int arr[], int n) {
+void bubble_sort(int arr[], int n)
+{
 	int flag = 1;
 	int m = n - 1;
 	while ((m > 0) && (flag == 1)) {

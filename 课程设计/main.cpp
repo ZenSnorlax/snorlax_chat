@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
 					cin >> begin >> end;
 					map_file.shortest_point(begin, end);
 					break;
-			case '3':
+				case '3':
 					map_file.fclear();
 					break;
 				case '4':

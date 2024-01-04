@@ -16,7 +16,8 @@ int main(void) {
                           // 读取该串列标号
   n_columns = read_column_numbers(columns, MAX_COLS);
   // 读取、处理和打印剩余的输入行
-  while (gets(input) != NULL) {
+  while (gets(input) != NULL)
+  {
     printf("Original input:%s\n", input);
     rearrange(output, input, n_columns, columns);
     printf("Rearranged line:%s\n", output);
