@@ -31,6 +31,7 @@ map("n", "<Leader>cx", ":colorscheme<Leader>gruvbox<CR>", opt)
 map("n", "<Leader>cd", ":colorscheme<Leader>tokyonight-day<CR>", opt)
 map("n", "<Leader>cs", ":colorscheme<Leader>tokyonight-storm<CR>", opt)
 map("n", "<Leader>ft", ":Vista<Leader>nvim_lsp<CR>", opt)
+map("n", "<Leader>c")
 
 map("n", "<Leader>tm", ":ToggleTerm<CR>", opt)
 
