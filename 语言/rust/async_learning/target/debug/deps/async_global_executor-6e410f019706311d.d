@@ -1,0 +1,10 @@
+/home/fedora/First/语言/rust/async_learning/target/debug/deps/libasync_global_executor-6e410f019706311d.rmeta: /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-global-executor-2.4.1/src/lib.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-global-executor-2.4.1/src/config.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-global-executor-2.4.1/src/executor.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-global-executor-2.4.1/src/init.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-global-executor-2.4.1/src/reactor.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-global-executor-2.4.1/src/threading.rs
+
+/home/fedora/First/语言/rust/async_learning/target/debug/deps/async_global_executor-6e410f019706311d.d: /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-global-executor-2.4.1/src/lib.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-global-executor-2.4.1/src/config.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-global-executor-2.4.1/src/executor.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-global-executor-2.4.1/src/init.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-global-executor-2.4.1/src/reactor.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-global-executor-2.4.1/src/threading.rs
+
+/home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-global-executor-2.4.1/src/lib.rs:
+/home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-global-executor-2.4.1/src/config.rs:
+/home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-global-executor-2.4.1/src/executor.rs:
+/home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-global-executor-2.4.1/src/init.rs:
+/home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-global-executor-2.4.1/src/reactor.rs:
+/home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-global-executor-2.4.1/src/threading.rs:

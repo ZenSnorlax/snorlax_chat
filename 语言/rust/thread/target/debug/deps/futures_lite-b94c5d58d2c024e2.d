@@ -1,0 +1,11 @@
+/home/fedora/First/语言/rust/thread/target/debug/deps/libfutures_lite-b94c5d58d2c024e2.rmeta: /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-lite-2.3.0/src/lib.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-lite-2.3.0/src/future.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-lite-2.3.0/src/prelude.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-lite-2.3.0/src/stream.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-lite-2.3.0/src/io.rs
+
+/home/fedora/First/语言/rust/thread/target/debug/deps/libfutures_lite-b94c5d58d2c024e2.rlib: /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-lite-2.3.0/src/lib.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-lite-2.3.0/src/future.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-lite-2.3.0/src/prelude.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-lite-2.3.0/src/stream.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-lite-2.3.0/src/io.rs
+
+/home/fedora/First/语言/rust/thread/target/debug/deps/futures_lite-b94c5d58d2c024e2.d: /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-lite-2.3.0/src/lib.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-lite-2.3.0/src/future.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-lite-2.3.0/src/prelude.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-lite-2.3.0/src/stream.rs /home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-lite-2.3.0/src/io.rs
+
+/home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-lite-2.3.0/src/lib.rs:
+/home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-lite-2.3.0/src/future.rs:
+/home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-lite-2.3.0/src/prelude.rs:
+/home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-lite-2.3.0/src/stream.rs:
+/home/fedora/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-lite-2.3.0/src/io.rs:
