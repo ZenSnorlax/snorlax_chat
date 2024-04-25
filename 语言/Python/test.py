@@ -1,31 +1,13 @@
-from pathlib import Path
-import json
+import re
 
+line = "Cats are smarter than dogs"
+# .* 表示任意匹配除换行符（\n、\r）之外的任何单个或多个字符
+# (.*?) 表示"非贪婪"模式，只保存第一个匹配到的子串
+matchObj = re.match(r'(.*) are (.*?) .*', line, re.M | re.I)
 
-def get_stored_number(path):
-    if path.exists():
-        contents = path.read_text()
-        favorite_number = json.loads(contents)
-        return favorite_number
-    else:
-        return None
-
-
-def get_new_number(path):
-    favorite = input("what's your favorite number? ")
-    contents = json.dumps(favorite)
-    path.write_text(contents)
-    return contents
-
-
-def greet_user():
-    path = Path('favorite_number.json')
-    favarote_number = get_stored_number(path)
-    if favarote_number:
-        print(f"welcome!\n\tyour favarite number is : {favarote_number}")
-    else:
-        favarote_number = get_new_number(path)
-        print(f"we'll rember your favorite number when you back")
-
-
-greet_user()
+if matchObj:
+    print("matchObj.group() : ", matchObj.group())
+    print("matchObj.group(1) : ", matchObj.group(1))
+    print("matchObj.group(2) : ", matchObj.group(2))
+else:
+    print("No match!!")
