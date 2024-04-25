@@ -1,0 +1,12 @@
+/home/fedora/First/语言/rust/async-counter-app/target/debug/deps/libcolor_eyre-da4ab403f4a27594.rmeta: /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/lib.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/config.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/fmt.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/handler.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/private.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/section/mod.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/section/help.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/writers.rs
+
+/home/fedora/First/语言/rust/async-counter-app/target/debug/deps/color_eyre-da4ab403f4a27594.d: /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/lib.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/config.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/fmt.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/handler.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/private.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/section/mod.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/section/help.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/writers.rs
+
+/home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/lib.rs:
+/home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/config.rs:
+/home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/fmt.rs:
+/home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/handler.rs:
+/home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/private.rs:
+/home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/section/mod.rs:
+/home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/section/help.rs:
+/home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/color-eyre-0.6.3/src/writers.rs:

@@ -1,1 +1,0 @@
-/home/fedora/First/语言/rust/ratatui-json-editor/target/debug/ratatui-json-editor: /home/fedora/First/语言/rust/ratatui-json-editor/src/app.rs /home/fedora/First/语言/rust/ratatui-json-editor/src/main.rs /home/fedora/First/语言/rust/ratatui-json-editor/src/ui.rs
