@@ -1,56 +1,12 @@
-pub struct List {
-    head: Link,
-}
-enum Link {
-    Empty,
-    More(Box<Node>),
-}
-struct Node {
-    elem: i32,
-    next: Link,
-}
-impl List {
-    pub fn new() -> Self {
-        List { head: Link::Empty }
-    }
-    pub fn push(&mut self, elem: i32) {
-        let new_node = Box::new(Node {
-            elem,
-            next: std::mem::replace(&mut self.head, Link::Empty),
-        });
-        self.head = Link::More(new_node);
-    }
-    pub fn pop(&mut self) -> Option<i32> {
-        match std::mem::replace(&mut self.head, Link::Empty) {
-            Link::Empty => None,
-            Link::More(node) => {
-                self.head = node.next;
-                Some(node.elem)
-            }
-        }
-    }
-}
-
-impl Drop for List {
-    fn drop(&mut self) {
-        let mut cur_link = std::mem::replace(&mut self.head, Link::Empty);
-
-        while let Link::More(mut boxed_node) = cur_link {
-            cur_link = std::mem::replace(&mut boxed_node.next, Link::Empty);
-        }
-    }
-}
+mod first_list;
+mod second_list;
+#[allow(unused_imports)]
+//use first_list::List;
+use second_list::List;
+// in first.rs
 #[cfg(test)]
 mod test {
     use super::*;
-    #[test]
-    fn long_list() {
-        let mut list = List::new();
-        for i in 0..100000 {
-            list.push(i);
-        }
-        drop(list);
-    }
     #[test]
     fn basics() {
         let mut list = List::new();
@@ -78,5 +34,18 @@ mod test {
         // Check exhaustion
         assert_eq!(list.pop(), Some(1));
         assert_eq!(list.pop(), None);
+    }
+    #[test]
+    fn into_iter() {
+        let mut list = List::new();
+        list.push(1);
+        list.push(2);
+        list.push(3);
+
+        let mut iter = list.into_iter();
+        assert_eq!(iter.next(), Some(3));
+        assert_eq!(iter.next(), Some(2));
+        assert_eq!(iter.next(), Some(1));
+        assert_eq!(iter.next(), None);
     }
 }
