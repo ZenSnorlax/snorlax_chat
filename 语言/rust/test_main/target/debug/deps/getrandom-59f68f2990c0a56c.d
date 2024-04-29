@@ -1,0 +1,12 @@
+/home/fedora/First/语言/rust/test_main/target/debug/deps/libgetrandom-59f68f2990c0a56c.rmeta: /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/lib.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/error.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/util.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/error_impls.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/util_libc.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/use_file.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/lazy.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/linux_android_with_fallback.rs
+
+/home/fedora/First/语言/rust/test_main/target/debug/deps/getrandom-59f68f2990c0a56c.d: /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/lib.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/error.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/util.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/error_impls.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/util_libc.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/use_file.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/lazy.rs /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/linux_android_with_fallback.rs
+
+/home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/lib.rs:
+/home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/error.rs:
+/home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/util.rs:
+/home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/error_impls.rs:
+/home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/util_libc.rs:
+/home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/use_file.rs:
+/home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/lazy.rs:
+/home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/getrandom-0.2.14/src/linux_android_with_fallback.rs:

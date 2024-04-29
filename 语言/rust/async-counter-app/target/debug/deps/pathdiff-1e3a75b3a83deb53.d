@@ -1,0 +1,5 @@
+/home/fedora/First/语言/rust/async-counter-app/target/debug/deps/libpathdiff-1e3a75b3a83deb53.rmeta: /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/pathdiff-0.2.1/src/lib.rs
+
+/home/fedora/First/语言/rust/async-counter-app/target/debug/deps/pathdiff-1e3a75b3a83deb53.d: /home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/pathdiff-0.2.1/src/lib.rs
+
+/home/fedora/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/pathdiff-0.2.1/src/lib.rs:
