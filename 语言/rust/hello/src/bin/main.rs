@@ -18,8 +18,11 @@ fn main() {
 }
 fn handle_connection(mut stream: TcpStream) {
     let mut buffer = [0; 1024];
+
     stream.read_exact(&mut buffer).unwrap();
+    
     let get = b"GET / HTTP/1.1\r\n";
+
     let sleep = b"GET /sleep HTTP/1.1\r\n"; let (status_line, filename) = if
         buffer.starts_with(get) { ("HTTP/1.1 200 OK", "hello.html") } else if
         buffer.starts_with(sleep) {
@@ -30,6 +33,7 @@ fn handle_connection(mut stream: TcpStream) {
             ("HTTP/1.1 404 NOTFOUND ", "404.html")
         };
     let contents = fs::read_to_string(filename).unwrap();
+    
     let response = format!(
         "{}\r\nContent-Length: {}\r\n\r\n{}",
         status_line,
