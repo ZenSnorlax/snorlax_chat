@@ -1,6 +1,5 @@
 // ANCHOR: all
 mod tui;
-
 use std::time::Duration;
 
 use color_eyre::eyre::Result;

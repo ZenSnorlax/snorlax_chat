@@ -1,0 +1,11 @@
+/home/qing/First/语言/rust/selenium/target/debug/deps/libfutures_core-ff7e52a90e3241ee.rmeta: /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/futures-core-0.3.30/src/lib.rs /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/futures-core-0.3.30/src/future.rs /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/futures-core-0.3.30/src/stream.rs /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/futures-core-0.3.30/src/task/mod.rs /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/futures-core-0.3.30/src/task/poll.rs /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/futures-core-0.3.30/src/task/__internal/mod.rs /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/futures-core-0.3.30/src/task/__internal/atomic_waker.rs
+
+/home/qing/First/语言/rust/selenium/target/debug/deps/futures_core-ff7e52a90e3241ee.d: /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/futures-core-0.3.30/src/lib.rs /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/futures-core-0.3.30/src/future.rs /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/futures-core-0.3.30/src/stream.rs /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/futures-core-0.3.30/src/task/mod.rs /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/futures-core-0.3.30/src/task/poll.rs /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/futures-core-0.3.30/src/task/__internal/mod.rs /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/futures-core-0.3.30/src/task/__internal/atomic_waker.rs
+
+/home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/futures-core-0.3.30/src/lib.rs:
+/home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/futures-core-0.3.30/src/future.rs:
+/home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/futures-core-0.3.30/src/stream.rs:
+/home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/futures-core-0.3.30/src/task/mod.rs:
+/home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/futures-core-0.3.30/src/task/poll.rs:
+/home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/futures-core-0.3.30/src/task/__internal/mod.rs:
+/home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/futures-core-0.3.30/src/task/__internal/atomic_waker.rs:

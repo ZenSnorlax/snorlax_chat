@@ -1,0 +1,10 @@
+/home/qing/First/语言/rust/selenium/target/debug/deps/libspin-177b04273528842f.rmeta: /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/spin-0.5.2/src/lib.rs /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/spin-0.5.2/src/mutex.rs /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/spin-0.5.2/src/rw_lock.rs /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/spin-0.5.2/src/once.rs
+
+/home/qing/First/语言/rust/selenium/target/debug/deps/libspin-177b04273528842f.rlib: /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/spin-0.5.2/src/lib.rs /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/spin-0.5.2/src/mutex.rs /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/spin-0.5.2/src/rw_lock.rs /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/spin-0.5.2/src/once.rs
+
+/home/qing/First/语言/rust/selenium/target/debug/deps/spin-177b04273528842f.d: /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/spin-0.5.2/src/lib.rs /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/spin-0.5.2/src/mutex.rs /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/spin-0.5.2/src/rw_lock.rs /home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/spin-0.5.2/src/once.rs
+
+/home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/spin-0.5.2/src/lib.rs:
+/home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/spin-0.5.2/src/mutex.rs:
+/home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/spin-0.5.2/src/rw_lock.rs:
+/home/qing/.cargo/registry/src/rsproxy.cn-8f6827c7555bfaf8/spin-0.5.2/src/once.rs:

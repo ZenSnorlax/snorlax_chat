@@ -10,5 +10,9 @@ color-eyre = "0.6.3"
 crossterm = { version = "0.27.0", features = ["event-stream"] }
 ratatui = "0.26.1"
 
+[profile.release]
+lto = true      # 启用链接时优化
+codegen-units = 1
+panic = 'abort' # 在发布模式下，使用'abort'以减小大小，但不打印panic信息
 
  
