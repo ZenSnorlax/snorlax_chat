@@ -3,4 +3,5 @@
 #忽略可执行文件
 *.out
 /LearnFlask/.env
+/LearnFlask/data.db
 
