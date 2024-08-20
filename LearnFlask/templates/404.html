@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<ul class="movie-list">
+    <li>
+        Page Not Found - 404
+        <span class="float-right">
+            <a class="imdb" href="https://www.imdb.com/find?q={{ movie.title }}" target="_blank"
+                title="Find this movie on IMDb">IMDb</a>
+        </span>
+    </li>
+</ul>
+{% endblock %}
