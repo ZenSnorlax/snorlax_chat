@@ -6,6 +6,7 @@ headers = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
 }
 
+
 def down_img(url: str):
     response = requests.get(url, headers=headers)
 
@@ -16,6 +17,10 @@ def down_img(url: str):
     pattern = r'<img\sclass[^>]+src="([^"]+)"'
     matches = re.findall(pattern, content)
 
+    if not matches:
+            print(f"页面 {url} 没有图片")
+            return
+    
     # 打印并保存图片
     for match in matches:
         # 检查 URL 是否已经包含了协议
@@ -35,6 +40,7 @@ def down_img(url: str):
                 img_file.write(image_response.content)
         except requests.exceptions.RequestException as e:
             print(f"Failed to download {full_url}: {e}")
+
 
 start = "5078804"
 for i in range(0, 100):
