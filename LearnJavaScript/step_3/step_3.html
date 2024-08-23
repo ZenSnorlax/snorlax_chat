@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人博客</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F0F0F0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0 15px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        .article-list,
+        .article-detail {
+            margin-bottom: 20px;
+        }
+
+        .article-item {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-item h2 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        .article-item p {
+            margin: 10px 0;
+        }
+
+        .contact-form {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .contact-form button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>个人博客</h1>
+    </header>
+    <nav>
+        <a href="#home">首页</a>
+        <a href="#articles">文章列表</a>
+        <a href="#contact">联系方式</a>
+    </nav>
+    <div class="container">
+        <!-- 首页 -->
+        <section id="home">
+            <h2>博客简介</h2>
+            <p>欢迎来到我的个人博客！这里分享我对技术、编程和生活的见解和经验。</p>
+            <h2>最新文章</h2>
+            <div class="article-list">
+                <!-- 最新文章示例 -->
+                <div class="article-item">
+                    <h2><a href="#article1">文章标题 1</a></h2>
+                    <p>文章摘要 1</p>
+                </div>
+                <div class="article-item">
+                    <h2><a href="#article2">文章标题 2</a></h2>
+                    <p>文章摘要 2</p>
+                </div>
+            </div>
+            <h2>热门文章</h2>
+            <div class="article-list">
+                <!-- 热门文章示例 -->
+                <div class="article-item">
+                    <h2><a href="#article3">热门文章标题 1</a></h2>
+                    <p>热门文章摘要 1</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 文章列表 -->
+        <section id="articles">
+            <h2>文章列表</h2>
+            <div class="article-list">
+                <!-- 文章列表示例 -->
+                <div class="article-item">
+                    <h2><a href="#article1">文章标题 1</a></h2>
+                    <p>文章摘要 1</p>
+                </div>
+                <div class="article-item">
+                    <h2><a href="#article2">文章标题 2</a></h2>
+                    <p>文章摘要 2</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 单篇文章 -->
+        <section id="article1" class="article-detail">
+            <h2>文章标题 1</h2>
+            <p>这是文章的详细内容，包括一些文字、图片和视频。</p>
+            <img src="example.jpg" alt="示例图片" style="width: 100%; max-width: 600px;">
+            <video width="100%" controls>
+                <source src="example.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+
+        <!-- 联系方式 -->
+        <section id="contact">
+            <h2>联系方式</h2>
+            <div class="contact-form">
+                <form action="#" method="post">
+                    <label for="name">姓名:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="email">邮箱:</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="message">信息:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                    <button type="submit">发送</button>
+                </form>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2024 个人博客</p>
+        <a href="https://twitter.com/yourprofile" target="_blank">Twitter</a>
+        <a href="https://github.com/yourprofile" target="_blank">GitHub</a>
+    </footer>
+</body>
+
+</html>

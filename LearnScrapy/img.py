@@ -18,9 +18,9 @@ def down_img(url: str):
     matches = re.findall(pattern, content)
 
     if not matches:
-            print(f"页面 {url} 没有图片")
-            return
-    
+        print(f"页面 {url} 没有图片")
+        return
+
     # 打印并保存图片
     for match in matches:
         # 检查 URL 是否已经包含了协议
