@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>评论表单</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h4 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .response-container {
+            margin-top: 20px;
+        }
+
+        .response-card {
+            background-color: #e9ecef;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+            /* Ensures long lines wrap */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h4>提交评论</h4>
+        <form id="comment-form">
+            <label for="name">姓名：</label>
+            <input type="text" id="name" name="name" required placeholder="请输入您的姓名">
+            <label for="comment">评论：</label>
+            <textarea id="comment" name="comment" rows="4" required placeholder="请输入您的评论"></textarea>
+            <button type="submit">提交</button>
+            <h4 id="response-result"></h4>
+        </form>
+
+        <div id="response-container" class="response-container"></div>
+    </div>
+
+    <script>
+        document.getElementById('comment-form').addEventListener('submit', function (event) {
+            event.preventDefault(); // 阻止默认表单提交行为
+
+            // 获取表单数据
+            const name = document.getElementById('name').value;
+            const comment = document.getElementById('comment').value;
+
+            // 构造POST请求的主体数据
+            const data = {
+                name: name,
+                body: comment,
+                userId: 1 // 假设用户ID为1
+            };
+
+            // 使用Fetch API发送POST请求
+            fetch('https://jsonplaceholder.typicode.com/posts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(result => {
+                    // 显示服务器响应结果
+                    displayResponse(result);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+
+        // 定义显示响应结果的函数
+        function displayResponse(result) {
+            // 在 #response-result 元素中显示标题
+            const responseResult = document.getElementById('response-result');
+            responseResult.textContent = "服务器响应结果";
+
+            // 在 .response-container 中显示JSON格式的响应
+            const responseContainer = document.getElementById('response-container');
+            responseContainer.innerHTML = ''; // 清空之前的内容
+            const responseCard = document.createElement('div');
+            responseCard.classList.add('response-card');
+            responseCard.innerHTML = `
+                <pre>${JSON.stringify(result, null, 2)}</pre>
+            `;
+            responseContainer.appendChild(responseCard);
+        }
+    </script>
+</body>
+
+</html>
