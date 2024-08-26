@@ -28,7 +28,7 @@ class MyString {
         if (str) {
             data = new char[strlen(str) + 1];
             std::strcpy(data, str);
-            std::cout << "Construct: " << data << std::endl;
+            std::cout << "Construct: " <<  std::endl;
         }
     }
 
