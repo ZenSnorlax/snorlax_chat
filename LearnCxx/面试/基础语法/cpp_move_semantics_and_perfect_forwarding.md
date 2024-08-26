@@ -16,33 +16,58 @@ C++ 的移动语义和完美转发是两个关键概念，它们帮助提高程�
 
 ```cpp
 #include <iostream>
-#include <string>
+#include <cstring> // 推荐使用 <cstring> 而不是 <string.h>
 
 class MyString {
-private:
-    char* data;
-public:
-    MyString(const char* str) {
-        data = new char[strlen(str) + 1];
-        strcpy(data, str);
+  private:
+    char *data;
+
+  public:
+    // 构造函数
+    explicit MyString(const char *str = "") : data(nullptr) {
+        if (str) {
+            data = new char[strlen(str) + 1];
+            std::strcpy(data, str);
+            std::cout << "Construct: " << data << std::endl;
+        }
     }
 
     // 移动构造函数
-    MyString(MyString&& other) noexcept {
-        data = other.data;   // 转移指针的所有权
-        other.data = nullptr; // 将源对象的指针置空
+    MyString(MyString &&other) noexcept : data(other.data) {
+        other.data = nullptr;
+        std::cout << "Move Construct" << std::endl;
     }
 
+    // 移动赋值运算符
+    MyString& operator=(MyString &&other) noexcept {
+        if (this != &other) {
+            delete[] data;  // 释放当前对象的资源
+            data = other.data;
+            other.data = nullptr;
+            std::cout << "Move Assign" << std::endl;
+        }
+        return *this;
+    }
+
+    // 析构函数
     ~MyString() {
         delete[] data;
+        std::cout << "Destruct" << std::endl;
     }
+
+    // 禁用复制构造函数和复制赋值运算符
+    MyString(const MyString &) = delete;
+    MyString& operator=(const MyString &) = delete;
 };
 
 int main() {
     MyString a("Hello");
-    MyString b(std::move(a)); // 这里调用移动构造函数
+    MyString b(std::move(a));  // 调用移动构造函数
+    MyString c;
+    c = std::move(b);          // 调用移动赋值运算符
     return 0;
 }
+
 ```
 
 在上面的代码中，`MyString` 类的移动构造函数通过转移资源所有权（将指针从源对象转移到目标对象）避免了不必要的资源复制。
