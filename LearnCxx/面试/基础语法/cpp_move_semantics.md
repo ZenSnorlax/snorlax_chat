@@ -106,16 +106,6 @@ int main() {
 }
 ```
 
-## 输出
-```plaintext
-Constructor: allocated 10 ints.
-Move constructor: resource moved.
-Constructor: allocated 20 ints.
-Move assignment: resource moved.
-Destructor: resource released.
-Destructor: resource released.
-Destructor: resource released.
-```
 
 ## 总结
 
