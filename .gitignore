@@ -4,4 +4,6 @@
 *.out
 /LearnFlask/.env
 /LearnFlask/data.db
+test*
+
 
