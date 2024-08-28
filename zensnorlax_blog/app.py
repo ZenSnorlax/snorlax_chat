@@ -3,6 +3,11 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route("/")
 def index():
-    return 'Hello World'
+    return "Hello World"
+
+
+@app.route("/archives")
+def archives():
+    return "archives"
