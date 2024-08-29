@@ -1,19 +1,24 @@
-from flask import Flask, render_template
+from flask import Flask, render_template_string
 
 app = Flask(__name__)
 
+# 假设这些页面信息从数据库或配置文件中读取
+pages = [
+    {"name": "home", "url": "/", "content": "Welcome to the home page!"},
+    {"name": "about", "url": "/about", "content": "This is the about page."},
+    {"name": "contact", "url": "/contact", "content": "Contact us here."},
+]
 
-@app.route("/")
-def index():
-    return "Hello World"
+# 动态生成路由
+for page in pages:
 
+    def make_route(content):
+        def route():
+            return render_template_string("<h1>{{ content }}</h1>", content=content)
 
-@app.route("/archives")
-def archives():
-    return "archives"
+        return route
 
+    app.add_url_rule(page["url"], page["name"], make_route(page["content"]))
 
-@app.route("/2024/8/29")
-def page_5():
-    # 渲染模板 '2024_8_29.html' 并返回其内容
-    return render_template("2024_8_29.html")
+if __name__ == "__main__":
+    app.run(debug=True)
