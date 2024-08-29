@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, url_for
 
 app = Flask(__name__)
 
@@ -12,6 +12,9 @@ def index():
 def archives():
     return "archives"
 
-@app.route("/2024/8/你的敏感,就是你的天赋")
-def page_4():
-    return "index"
+
+@app.route("/2024/8/29")
+def page_5():
+    # 使用 url_for 生成指向静态文件的 URL
+    file_url = url_for("static", filename="2024_8_29.html")
+    return f"<a href='{file_url}'>Open the file</a>"
