@@ -16,3 +16,4 @@ def archives():
 @app.route("/<year>/<month>/<post>")
 def article(year, month, post):
     return "year: %s, month: %s, article: %s" % (year, month, post)
+
