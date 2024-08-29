@@ -1,6 +1,13 @@
+from flask import Flask
 
-def app.route("/2024/8/index"):
-    return "index"
+app = Flask(__name__)
 
-def app.route("/2024/8/index"):
-    return "index"
+
+@app.route("/")
+def index():
+    return "Hello World"
+
+
+@app.route("/archives")
+def archives():
+    return "archives"
