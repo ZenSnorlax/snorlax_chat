@@ -20,7 +20,7 @@ cursor.execute("SELECT page_number FROM page_info WHERE id = 1")
 page_number = cursor.fetchone()[0]
 
 # 生成新的路由
-route_name = f"page{page_number}"
+route_name = f"page_{page_number}"
 route = f"""\n\n\n@app.route("/{year}/{month}/{post}")
 def {route_name}():
     return "index"

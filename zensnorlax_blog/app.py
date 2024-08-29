@@ -12,3 +12,7 @@ def index():
 def archives():
     return "archives"
 
+
+@app.route("/2024/8/hello")
+def page0():
+    return "index"
