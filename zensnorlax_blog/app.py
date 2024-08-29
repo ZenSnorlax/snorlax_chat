@@ -14,5 +14,16 @@ def archives():
 
 
 @app.route("/2024/8/hello")
-def page0():
+def page_0():
+    return "index"
+
+
+@app.route("/2024/8/hekk")
+def page_1():
+    return "index"
+
+
+
+@app.route("/2024/8/j")
+def page_2():
     return "index"
