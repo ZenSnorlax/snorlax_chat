@@ -7,9 +7,7 @@ from datetime import datetime
 now = datetime.now()
 year = now.year
 month = now.month
-
-# 获取post名称
-post = input("请输入post名称: ")
+day = now.day
 
 # 连接到数据库
 conn = sqlite3.connect("page_numbers.db")
@@ -22,7 +20,7 @@ page_number = cursor.fetchone()[0]
 # 生成新的路由
 route_name = f"page_{page_number}"
 
-route = f"""\n\n@app.route("/{year}/{month}/{post}")
+route = f"""\n\n@app.route("/{year}/{month}/{day}")
 def {route_name}():
     return "index"
 """
