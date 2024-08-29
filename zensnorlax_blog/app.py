@@ -19,5 +19,5 @@ def index():
 
 
 @app.route("/2024/8/test")
-def index():
+def inde():
     return "index"
