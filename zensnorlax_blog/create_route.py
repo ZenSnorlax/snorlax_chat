@@ -13,7 +13,7 @@ route = f"""
 
 @app.route("/{year}/{month}/{post}")
 def index():
-        return "index"
+    return "index"
 """
 with open("app.py", "a") as f:
     f.write(route)
