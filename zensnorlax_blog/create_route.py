@@ -12,7 +12,7 @@ post = input("请输入post名称: ")
 route = f"""
 
 @app.route("/{year}/{month}/{post}")
-    def index():
+def index():
         return "index"
 """
 with open("app.py", "a") as f:
