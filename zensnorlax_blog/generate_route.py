@@ -28,6 +28,9 @@ def {route_name}():
 # 将路由写入文件
 with open("app.py", "a") as f:
     f.write(route)
+    
+# 在templates目录下创建新的HTML文件
+open(f"templates/{year}_{month}_{day}.html", "w").close()
 
 # 增加page_number并更新数据库
 cursor.execute("UPDATE page_info SET page_number = page_number + 1 WHERE id = 1")
