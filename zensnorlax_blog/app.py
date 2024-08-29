@@ -12,6 +12,12 @@ def index():
 def archives():
     return "archives"
 
+
 @app.route("/2024/8/index")
+def index():
+    return "index"
+
+
+@app.route("/2024/8/test")
 def index():
     return "index"

@@ -9,9 +9,7 @@ month = datetime.datetime.now().month
 # 获取post名称
 post = input("请输入post名称: ")
 
-route = f"""
-
-@app.route("/{year}/{month}/{post}")
+route = f"""\n\n\n@app.route("/{year}/{month}/{post}")
 def index():
     return "index"
 """
