@@ -11,3 +11,4 @@ def index():
 @app.route("/archives")
 def archives():
     return "archives"
+
