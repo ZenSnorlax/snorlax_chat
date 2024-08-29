@@ -20,5 +20,3 @@ for page in pages:
 
     app.add_url_rule(page["url"], page["name"], make_route(page["content"]))
 
-if __name__ == "__main__":
-    app.run(debug=True)
