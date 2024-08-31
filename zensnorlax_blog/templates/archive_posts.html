@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archives for {{ year }}-{{ month }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .post-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .post-list li {
+            margin-bottom: 20px;
+        }
+
+        .post-title {
+            font-size: 1.5em;
+            color: #333;
+            margin: 0;
+        }
+
+        .post-meta {
+            font-size: 0.9em;
+            color: #777;
+        }
+
+        .back-link {
+            margin-bottom: 20px;
+            display: inline-block;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="{{ url_for('archives') }}" class="back-link">&larr; Back to Archives</a>
+    <h1>Posts from {{ year }}-{{ month }}</h1>
+    <ul class="post-list">
+        {% for post in posts %}
+        <li>
+            <h2 class="post-title">{{ post.title }}</h2>
+            <p class="post-meta">Published on {{ post.date_created }}</p>
+            <p><a href="{{ url_for( post_id=post.id) }}">Read more</a></p>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>

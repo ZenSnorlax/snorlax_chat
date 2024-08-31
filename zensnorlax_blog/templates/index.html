@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zensnorlax的个人博客</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index_style.css') }}">
+</head>
+
+<body>
+    <!-- 顶部导航栏 -->
+    <nav id="navbar">
+        <ul>
+            <li><a href="{{ url_for('index') }}">首页</a></li>
+            <li><a href="{{ url_for('archives') }}">归档</a></li>
+        </ul>
+    </nav>
+
+    <!-- 图片和博客简介 -->
+    <div id="header-container">
+        <img src="{{ url_for('static', filename='index.png') }}" id="logo" alt="博客Logo">
+        <div id="introduce">
+            <h1>欢迎来到zensnorlax的博客</h1>
+            <p>在这里分享我的编程之旅与心得。</p>
+        </div>
+    </div>
+
+    <!-- 主体内容区域 -->
+    <div id="main">
+        <div id="content">
+            <!-- 文章列表 -->
+            {% for post in posts %}
+            <article class="post">
+                <h2><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
+                <p class="post-meta">发布于 {{ post.date_created }}</p>
+                <p class="post-excerpt">{{ post.excerpt }}</p>
+                <a href="{{ url_for('post', post_id=post.id) }}" class="read-more">阅读更多 &raquo;</a>
+            </article>
+            {% endfor %}
+        </div>
+
+        <!-- 侧边栏 -->
+        <aside id="sidebar">
+            <section>
+                <h3>分类</h3>
+                <ul>
+                    {% for category in categories %}
+                    <li><a href="{{ url_for('category', category_id=category.id) }}">{{ category.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </section>
+            <section>
+                <h3>归档</h3>
+                <ul>
+                    <li><a href="{{ url_for('archives') }}">查看所有归档</a></li>
+                </ul>
+            </section>
+            <section>
+                <h3>标签</h3>
+                <div class="tag-cloud">
+                    {% for tag in tags %}
+                    <a href="{{ url_for('tag', tag_id=tag.id) }}" class="tag">{{ tag.name }}</a>
+                    {% endfor %}
+                </div>
+            </section>
+        </aside>
+    </div>
+
+    <!-- 底部区域 -->
+    <footer id="footer">
+        <p>&copy; {{ current_year }} zensnorlax的个人博客. 保留所有权利。</p>
+        <p>关注我们：
+            <a href="#">Twitter</a> |
+            <a href="#">Facebook</a> |
+            <a href="#">Instagram</a>
+        </p>
+    </footer>
+</body>
+
+</html>
