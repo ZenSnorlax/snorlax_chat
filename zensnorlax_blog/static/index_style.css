@@ -103,8 +103,8 @@ html {
 
 #footer {
     text-align: center;
-    padding: 5px;
-    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0fpx;
+    
     /* 调整为半透明背景 */
     color: white;
     position: fixed;
