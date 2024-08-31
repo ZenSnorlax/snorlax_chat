@@ -20,14 +20,14 @@
                 <label>文章归档</label>
                 <ul>
                     {% for post in posts %}
-                    <li><a href="{{ url_for(post_id=post.id) }}">{{ post.title }}</a></li>
+                    <li><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></li>
                     {% endfor %}
                 </ul>
             </div>
         </div>
     </div>
     <div id="footer">
-        <p>创建日期: {{ post.data_created }}</p>
+        <p>创建日期: {{ post.date_created }}</p>
     </div>
 </body>
 
