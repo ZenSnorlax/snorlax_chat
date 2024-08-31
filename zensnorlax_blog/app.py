@@ -74,10 +74,14 @@ def post(post_id):
     根据文章ID返回对应的内容页面。
     :param post_id: 文章ID
     """
-    posts = Post.query.all()
+
+    # 获取最近的 5 篇文章
+    recent_posts = (
+        db.session.query(Post).order_by(Post.date_created.desc()).limit(5).all()
+    )
     post = Post.query.get_or_404(post_id, description="Post not found")
     content = get_post_content(post.content_path)
-    return render_template("post.html", posts=posts, post=post, content=content)
+    return render_template("post.html", posts=recent_posts, post=post, content=content)
 
 
 # 路由：显示特定年份和月份的文章

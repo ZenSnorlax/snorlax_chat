@@ -17,7 +17,7 @@
         </div>
         <div id="right">
             <div id="archives">
-                <label>文章归档</label>
+                <label>最近文章</label>
                 <ul>
                     {% for post in posts %}
                     <li><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></li>
