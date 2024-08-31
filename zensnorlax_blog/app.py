@@ -68,7 +68,7 @@ def archives():
     return render_template("archives.html", posts=grouped_posts)
 
 
-@app.route("post/<int:post_id>")
+@app.route("/post/<int:post_id>")
 def post(post_id):
     """
     根据文章ID返回对应的内容页面。
