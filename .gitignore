@@ -1,5 +1,17 @@
 /zensnorlax_blog/.env
 /zensnorlax_blog/__pycache__/*
+# 忽略CMake生成的构建目录
+/build/
+# 或者，如果构建目录不统一，可以使用通配符忽略所有可能的构建目录
+*/build/
+*/cmake-build-*/
+
+# 忽略CMake生成的其他文件
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CMakeLists.txt.user
+
 
 
 
