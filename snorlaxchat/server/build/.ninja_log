@@ -1,6 +1,0 @@
-# ninja log v6
-2	4742	1725520440772857942	CMakeFiles/snorlaxchat.dir/src/mysql.cpp.o	5fa5d60e26ac1ff3
-1	5075	1725520440771857949	CMakeFiles/snorlaxchat.dir/src/redis.cpp.o	98027574a71edc03
-2	10357	1725520440772857942	CMakeFiles/snorlaxchat.dir/src/main.cpp.o	48c00d3c8c5a6a27
-16	33415	1725524206598783781	CMakeFiles/snorlaxchat.dir/src/websocket_server.cpp.o	c529a9d4bc8a6b25
-33422	34644	1725524240003381038	snorlaxchat	880d94dfaab9681a
