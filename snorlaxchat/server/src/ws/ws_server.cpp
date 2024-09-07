@@ -1,6 +1,7 @@
 //
 //
-#include "websocket_server.h"
+#include "ws/ws_server.h"
+#include "mgr/user_mgr.h"
 #include <boost/beast/websocket.hpp>
 #include <iostream>
 #include <thread>
@@ -10,13 +11,13 @@ namespace net = boost::asio;
 using tcp = net::ip::tcp;
 namespace websocket = beast::websocket;
 
-websocketServer &websocketServer::instance(Mysql &&mysql, Redis &&redis) {
-    static websocketServer server(std::move(mysql), std::move(redis));
+websocketServer &websocketServer::instance(manager::Users &users) {
+    static websocketServer server(users);
     return server;
 }
 
-websocketServer::websocketServer(Mysql &&mysql, Redis &&redis)
-    : mysql_(std::move(mysql)), redis_(std::move(redis)) {}
+websocketServer::websocketServer(manager::Users &users)
+    : users_(std::move(users)) {}
 
 [[noreturn]] void websocketServer::start() {
     net::io_context ioc;
