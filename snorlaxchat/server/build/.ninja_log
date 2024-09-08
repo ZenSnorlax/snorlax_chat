@@ -1,0 +1,15 @@
+# ninja log v6
+3	1807	1725785250558880803	test/CMakeFiles/tests.dir/db/test_config.cpp.o	196595a8001e9bd2
+3	3002	1725784584587968035	src/CMakeFiles/core.dir/mgr/user.cpp.o	db6c2e161093ebc7
+3027	3061	1725784587611944935	lib/libcore.a	4428f8b69e19a5fc
+3	47	1725784584587968035	src/CMakeFiles/ws_server.dir/main.cpp.o	2f9565e19c53e3ae
+2	2788	1725784097179242778	src/CMakeFiles/ws_server.dir/mgr/session_guard.cpp.o	fd635ecab390b3db
+3061	3203	1725784587645944676	src/ws_server	54e66da422794a87
+1503	1704	1725785105065992194	test/tests	67d3ea6d9bf34831
+3	2866	1725784584587968035	src/CMakeFiles/core.dir/mgr/session_guard.cpp.o	148b927f859df224
+2	692	1725784097179242778	src/CMakeFiles/ws_server.dir/db/config.cpp.o	3494bb0b41c2810
+1	3008	1725784097179242778	src/CMakeFiles/ws_server.dir/mgr/user.cpp.o	21b8dd0a80eef152
+1	3134	1725784097179242778	src/CMakeFiles/ws_server.dir/db/conn_pool.cpp.o	89685b07a0f79224
+3	583	1725784584587968035	src/CMakeFiles/core.dir/db/config.cpp.o	15cf4a64c665e0d0
+2	3027	1725784584586968042	src/CMakeFiles/core.dir/db/conn_pool.cpp.o	86bf21efa6ea7edc
+2	236	1725785381225857522	test/tests	d140f2892393d0ce
