@@ -1,0 +1,44 @@
+[
+{
+  "directory": "/home/qing/CodeJourney/snorlaxchat/server/build",
+  "command": "/usr/bin/clang++ -I/home/qing/CodeJourney/snorlaxchat/server/include -I/usr/include/sw/redis++ -I/usr/include/hiredis -I/usr/include/mysql-cppconn-8 -I/usr/include/boost -O3 -DNDEBUG -std=gnu++20 -o src/CMakeFiles/core.dir/db/conn_pool.cpp.o -c /home/qing/CodeJourney/snorlaxchat/server/src/db/conn_pool.cpp",
+  "file": "/home/qing/CodeJourney/snorlaxchat/server/src/db/conn_pool.cpp",
+  "output": "src/CMakeFiles/core.dir/db/conn_pool.cpp.o"
+},
+{
+  "directory": "/home/qing/CodeJourney/snorlaxchat/server/build",
+  "command": "/usr/bin/clang++ -I/home/qing/CodeJourney/snorlaxchat/server/include -I/usr/include/sw/redis++ -I/usr/include/hiredis -I/usr/include/mysql-cppconn-8 -I/usr/include/boost -O3 -DNDEBUG -std=gnu++20 -o src/CMakeFiles/core.dir/mgr/user.cpp.o -c /home/qing/CodeJourney/snorlaxchat/server/src/mgr/user.cpp",
+  "file": "/home/qing/CodeJourney/snorlaxchat/server/src/mgr/user.cpp",
+  "output": "src/CMakeFiles/core.dir/mgr/user.cpp.o"
+},
+{
+  "directory": "/home/qing/CodeJourney/snorlaxchat/server/build",
+  "command": "/usr/bin/clang++ -I/home/qing/CodeJourney/snorlaxchat/server/include -I/usr/include/sw/redis++ -I/usr/include/hiredis -I/usr/include/mysql-cppconn-8 -I/usr/include/boost -O3 -DNDEBUG -std=gnu++20 -o src/CMakeFiles/core.dir/mgr/session_guard.cpp.o -c /home/qing/CodeJourney/snorlaxchat/server/src/mgr/session_guard.cpp",
+  "file": "/home/qing/CodeJourney/snorlaxchat/server/src/mgr/session_guard.cpp",
+  "output": "src/CMakeFiles/core.dir/mgr/session_guard.cpp.o"
+},
+{
+  "directory": "/home/qing/CodeJourney/snorlaxchat/server/build",
+  "command": "/usr/bin/clang++ -I/home/qing/CodeJourney/snorlaxchat/server/include -I/usr/include/sw/redis++ -I/usr/include/hiredis -I/usr/include/mysql-cppconn-8 -I/usr/include/boost -O3 -DNDEBUG -std=gnu++20 -o src/CMakeFiles/core.dir/db/config.cpp.o -c /home/qing/CodeJourney/snorlaxchat/server/src/db/config.cpp",
+  "file": "/home/qing/CodeJourney/snorlaxchat/server/src/db/config.cpp",
+  "output": "src/CMakeFiles/core.dir/db/config.cpp.o"
+},
+{
+  "directory": "/home/qing/CodeJourney/snorlaxchat/server/build",
+  "command": "/usr/bin/clang++ -I/home/qing/CodeJourney/snorlaxchat/server/include -I/usr/include/sw/redis++ -I/usr/include/hiredis -I/usr/include/mysql-cppconn-8 -I/usr/include/boost -O3 -DNDEBUG -std=gnu++20 -o src/CMakeFiles/ws_server.dir/main.cpp.o -c /home/qing/CodeJourney/snorlaxchat/server/src/main.cpp",
+  "file": "/home/qing/CodeJourney/snorlaxchat/server/src/main.cpp",
+  "output": "src/CMakeFiles/ws_server.dir/main.cpp.o"
+},
+{
+  "directory": "/home/qing/CodeJourney/snorlaxchat/server/build",
+  "command": "/usr/bin/clang++ -I/home/qing/CodeJourney/snorlaxchat/server/include -I/usr/include/sw/redis++ -I/usr/include/hiredis -I/usr/include/mysql-cppconn-8 -I/usr/include/boost -O3 -DNDEBUG -std=gnu++20 -o test/CMakeFiles/test_config.dir/db/test_config.cpp.o -c /home/qing/CodeJourney/snorlaxchat/server/test/db/test_config.cpp",
+  "file": "/home/qing/CodeJourney/snorlaxchat/server/test/db/test_config.cpp",
+  "output": "test/CMakeFiles/test_config.dir/db/test_config.cpp.o"
+},
+{
+  "directory": "/home/qing/CodeJourney/snorlaxchat/server/build",
+  "command": "/usr/bin/clang++ -I/home/qing/CodeJourney/snorlaxchat/server/include -I/usr/include/sw/redis++ -I/usr/include/hiredis -I/usr/include/mysql-cppconn-8 -I/usr/include/boost -O3 -DNDEBUG -std=gnu++20 -o test/CMakeFiles/tests.dir/db/test_conn_pool.cpp.o -c /home/qing/CodeJourney/snorlaxchat/server/test/db/test_conn_pool.cpp",
+  "file": "/home/qing/CodeJourney/snorlaxchat/server/test/db/test_conn_pool.cpp",
+  "output": "test/CMakeFiles/tests.dir/db/test_conn_pool.cpp.o"
+}
+]

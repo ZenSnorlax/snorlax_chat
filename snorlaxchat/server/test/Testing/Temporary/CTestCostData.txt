@@ -1,2 +1,3 @@
-test_config 2 0.00278628
+test_config 5 0.00266199
+test_conn_pool 1 0.0823785
 ---

@@ -1,10 +1,10 @@
-Start testing: Sep 08 16:51 CST
+Start testing: Sep 08 17:33 CST
 ----------------------------------------------------------
-1/1 Testing: test_config
-1/1 Test: test_config
-Command: "/home/qing/CodeJourney/snorlaxchat/server/test/tests"
+1/2 Testing: test_config
+1/2 Test: test_config
+Command: "/home/qing/CodeJourney/snorlaxchat/server/test/test_config"
 Directory: /home/qing/CodeJourney/snorlaxchat/server/test
-"test_config" start time: Sep 08 16:51 CST
+"test_config" start time: Sep 08 17:33 CST
 Output:
 ----------------------------------------------------------
 Running main() from /home/qing/googletest/googletest/src/gtest_main.cc
@@ -24,8 +24,8 @@ Running main() from /home/qing/googletest/googletest/src/gtest_main.cc
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"test_config" end time: Sep 08 16:51 CST
+"test_config" end time: Sep 08 17:33 CST
 "test_config" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Sep 08 16:51 CST
+End testing: Sep 08 17:33 CST

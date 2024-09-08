@@ -117,6 +117,20 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
+test/CMakeFiles/test_config.dir/rule:
+	cd /home/qing/CodeJourney/snorlaxchat/server && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/CMakeFiles/test_config.dir/rule
+.PHONY : test/CMakeFiles/test_config.dir/rule
+
+# Convenience name for target.
+test_config: test/CMakeFiles/test_config.dir/rule
+.PHONY : test_config
+
+# fast build rule for target.
+test_config/fast:
+	cd /home/qing/CodeJourney/snorlaxchat/server && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/test_config.dir/build.make test/CMakeFiles/test_config.dir/build
+.PHONY : test_config/fast
+
+# Convenience name for target.
 test/CMakeFiles/tests.dir/rule:
 	cd /home/qing/CodeJourney/snorlaxchat/server && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/CMakeFiles/tests.dir/rule
 .PHONY : test/CMakeFiles/tests.dir/rule
@@ -135,7 +149,7 @@ db/test_config.o: db/test_config.cpp.o
 
 # target to build an object file
 db/test_config.cpp.o:
-	cd /home/qing/CodeJourney/snorlaxchat/server && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.dir/build.make test/CMakeFiles/tests.dir/db/test_config.cpp.o
+	cd /home/qing/CodeJourney/snorlaxchat/server && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/test_config.dir/build.make test/CMakeFiles/test_config.dir/db/test_config.cpp.o
 .PHONY : db/test_config.cpp.o
 
 db/test_config.i: db/test_config.cpp.i
@@ -143,7 +157,7 @@ db/test_config.i: db/test_config.cpp.i
 
 # target to preprocess a source file
 db/test_config.cpp.i:
-	cd /home/qing/CodeJourney/snorlaxchat/server && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.dir/build.make test/CMakeFiles/tests.dir/db/test_config.cpp.i
+	cd /home/qing/CodeJourney/snorlaxchat/server && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/test_config.dir/build.make test/CMakeFiles/test_config.dir/db/test_config.cpp.i
 .PHONY : db/test_config.cpp.i
 
 db/test_config.s: db/test_config.cpp.s
@@ -151,8 +165,32 @@ db/test_config.s: db/test_config.cpp.s
 
 # target to generate assembly for a file
 db/test_config.cpp.s:
-	cd /home/qing/CodeJourney/snorlaxchat/server && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.dir/build.make test/CMakeFiles/tests.dir/db/test_config.cpp.s
+	cd /home/qing/CodeJourney/snorlaxchat/server && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/test_config.dir/build.make test/CMakeFiles/test_config.dir/db/test_config.cpp.s
 .PHONY : db/test_config.cpp.s
+
+db/test_conn_pool.o: db/test_conn_pool.cpp.o
+.PHONY : db/test_conn_pool.o
+
+# target to build an object file
+db/test_conn_pool.cpp.o:
+	cd /home/qing/CodeJourney/snorlaxchat/server && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.dir/build.make test/CMakeFiles/tests.dir/db/test_conn_pool.cpp.o
+.PHONY : db/test_conn_pool.cpp.o
+
+db/test_conn_pool.i: db/test_conn_pool.cpp.i
+.PHONY : db/test_conn_pool.i
+
+# target to preprocess a source file
+db/test_conn_pool.cpp.i:
+	cd /home/qing/CodeJourney/snorlaxchat/server && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.dir/build.make test/CMakeFiles/tests.dir/db/test_conn_pool.cpp.i
+.PHONY : db/test_conn_pool.cpp.i
+
+db/test_conn_pool.s: db/test_conn_pool.cpp.s
+.PHONY : db/test_conn_pool.s
+
+# target to generate assembly for a file
+db/test_conn_pool.cpp.s:
+	cd /home/qing/CodeJourney/snorlaxchat/server && $(MAKE) $(MAKESILENT) -f test/CMakeFiles/tests.dir/build.make test/CMakeFiles/tests.dir/db/test_conn_pool.cpp.s
+.PHONY : db/test_conn_pool.cpp.s
 
 # Help Target
 help:
@@ -162,10 +200,14 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... test_config"
 	@echo "... tests"
 	@echo "... db/test_config.o"
 	@echo "... db/test_config.i"
 	@echo "... db/test_config.s"
+	@echo "... db/test_conn_pool.o"
+	@echo "... db/test_conn_pool.i"
+	@echo "... db/test_conn_pool.s"
 .PHONY : help
 
 

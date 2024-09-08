@@ -11,7 +11,7 @@
 						1,
 						2
 					],
-					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"jsonFile" : "directory-.-Release-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.10"
@@ -21,7 +21,7 @@
 				},
 				{
 					"build" : "src",
-					"jsonFile" : "directory-src-Debug-b6cf2213fc5053b67c22.json",
+					"jsonFile" : "directory-src-Release-b6cf2213fc5053b67c22.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.10"
@@ -32,12 +32,12 @@
 					"targetIndexes" : 
 					[
 						0,
-						2
+						3
 					]
 				},
 				{
 					"build" : "test",
-					"jsonFile" : "directory-test-Debug-451c0598f41488bb20b9.json",
+					"jsonFile" : "directory-test-Release-451c0598f41488bb20b9.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.10"
@@ -47,11 +47,12 @@
 					"source" : "test",
 					"targetIndexes" : 
 					[
-						1
+						1,
+						2
 					]
 				}
 			],
-			"name" : "Debug",
+			"name" : "Release",
 			"projects" : 
 			[
 				{
@@ -66,7 +67,8 @@
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					]
 				}
 			],
@@ -75,21 +77,28 @@
 				{
 					"directoryIndex" : 1,
 					"id" : "core::@145eef247bfb46b6828c",
-					"jsonFile" : "target-core-Debug-d3fff98e120447d045be.json",
+					"jsonFile" : "target-core-Release-74d7fe66e07272dccce0.json",
 					"name" : "core",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 2,
+					"id" : "test_config::@36f028580bb02cc8272a",
+					"jsonFile" : "target-test_config-Release-6ffd3222c0efda22bc4b.json",
+					"name" : "test_config",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
 					"id" : "tests::@36f028580bb02cc8272a",
-					"jsonFile" : "target-tests-Debug-563fb57db9bfeabdabf8.json",
+					"jsonFile" : "target-tests-Release-32be0e06041d50dc54cd.json",
 					"name" : "tests",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 1,
 					"id" : "ws_server::@145eef247bfb46b6828c",
-					"jsonFile" : "target-ws_server-Debug-73a5cf5e142f43e47ea9.json",
+					"jsonFile" : "target-ws_server-Release-2cdc351583090feea1a1.json",
 					"name" : "ws_server",
 					"projectIndex" : 0
 				}
