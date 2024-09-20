@@ -1,0 +1,82 @@
+@startuml
+
+' Define styles
+skinparam backgroundColor #F0F0F0
+skinparam class {
+    BackgroundColor #FFFFFF
+    BorderColor #000000
+    FontSize 12
+}
+skinparam interface {
+    BackgroundColor #E0E0E0
+    BorderColor #000000
+    FontSize 12
+}
+skinparam arrow {
+    Color #333333
+}
+skinparam note {
+    BackgroundColor #FFFFE0
+    BorderColor #000000
+}
+
+' Define layout direction
+left to right direction
+
+' Define classes and interfaces
+interface Subject {
+  + addObserver(observer: Observer)
+  + removeObserver(observer: Observer)
+  - notifyObservers()
+}
+
+class WeatherStation {
+  - float temperature_
+  - float humidity_
+  - float pressure_
+  - unordered_set<Observer *> observers_
+  + addObserver(observer: Observer)
+  + removeObserver(observer: Observer)
+  + setMeasurements(temperature: float, humidity: float, pressure: float)
+  - measurementsChanged()
+  - notifyObservers()
+}
+
+interface Observer {
+  + update(temperature: float, humidity: float, pressure: float)
+}
+
+interface DisplayElement {
+  + display() const
+}
+
+class CurrentConditionsObserver {
+  - float temperature_
+  - float humidity_
+  - float pressure_
+  - std::shared_ptr<Subject> subject_
+  + update(temperature: float, humidity: float, pressure: float)
+  + display() const
+}
+
+' Define relationships
+Subject <|-- WeatherStation
+Observer <|-- CurrentConditionsObserver
+DisplayElement <|-- CurrentConditionsObserver
+
+WeatherStation "1" -- "many" Observer : observes
+CurrentConditionsObserver ..> WeatherStation : dependency
+
+' Add notes
+note right of WeatherStation
+    This class is responsible for maintaining
+    the weather data and notifying observers
+    about any changes.
+end note
+
+note right of CurrentConditionsObserver
+    This class implements Observer and DisplayElement
+    to display current weather conditions.
+end note
+
+@enduml

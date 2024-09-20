@@ -9,7 +9,7 @@ document.getElementById('connect').addEventListener('click', function() {
     }
 
     // 创建 WebSocket 连接
-    websocket = new WebSocket('ws://localhost:9001');
+    websocket = new WebSocket('ws://localhost:8080');
 
     // WebSocket 连接成功时触发
     websocket.onopen = function() {
