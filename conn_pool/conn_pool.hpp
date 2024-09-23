@@ -7,7 +7,6 @@
 #include <mutex>
 #include <optional>
 #include <queue>
-#include <stdexcept>
 #include <string>
 #include <thread>
 
