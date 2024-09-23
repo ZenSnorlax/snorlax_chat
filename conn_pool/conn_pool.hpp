@@ -31,31 +31,9 @@ class SQLConnPool {
         std::chrono::milliseconds retry_interval =
             std::chrono::milliseconds(1000)) {
         for (int attempt = 0; attempt <= max_retries; ++attempt) {
-            std::unique_lock<std::mutex> lock(mutex_);
-            if (cv_.wait_for(
-                    lock, timeout, [this] { return !queue_.empty(); })) {
-                auto session = std::move(queue_.front());
-                queue_.pop();
-                LOG(Level::DEBUG,
-                    "thread ",
-                    std::this_thread::get_id(),
-                    " get a connection on attemp ",
-                    attempt + 1);
+            auto session = tryGetConnection(timeout, attempt, max_retries);
+            if (session) {
                 return session;
-            } else {
-                LOG(Level::WARNING,
-                    "thread ",
-                    std::this_thread::get_id(),
-                    " failed to get a connection on attempt ",
-                    attempt + 1,
-                    " within timeout");
-                if (attempt == max_retries) {
-                    LOG(Level::ERROR,
-                        "thread ",
-                        std::this_thread::get_id(),
-                        " exhausted retries. Failed to get a connection.");
-                    return nullptr;
-                }
             }
             std::this_thread::sleep_for(retry_interval);
         }
@@ -94,6 +72,34 @@ class SQLConnPool {
     SQLConnPool& operator=(SQLConnPool&&) = delete;
 
    private:
+    std::unique_ptr<mysqlx::Session> tryGetConnection(
+        std::chrono::milliseconds timeout, int attempt, int max_retries) {
+        std::unique_lock<std::mutex> lock(mutex_);
+        if (cv_.wait_for(lock, timeout, [this] { return !queue_.empty(); })) {
+            auto session = std::move(queue_.front());
+            queue_.pop();
+            LOG(Level::DEBUG,
+                "thread ",
+                std::this_thread::get_id(),
+                " get a connection on attempt ",
+                attempt + 1);
+            return session;
+        } else {
+            LOG(Level::WARNING,
+                "thread ",
+                std::this_thread::get_id(),
+                " failed to get a connection on attempt ",
+                attempt + 1,
+                " within timeout");
+            if (attempt == max_retries) {
+                LOG(Level::ERROR,
+                    "thread ",
+                    std::this_thread::get_id(),
+                    " exhausted retries. Failed to get a connection.");
+            }
+        }
+        return nullptr;
+    }
     SQLConnPool(SQLConfig&& config, size_t size)
         : config_(config), capacity(size) {
         for (size_t i = 0; i < size; ++i) {
