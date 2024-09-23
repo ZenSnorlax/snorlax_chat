@@ -2,7 +2,6 @@
 
 #include <chrono>
 #include <condition_variable>
-#include <cstddef>
 #include <memory>
 #include <mutex>
 #include <optional>
@@ -16,7 +15,7 @@ struct SQLConfig {
     std::string host;
     std::string user;
     int port;
-    std::string password;
+    std::string password; 
     std::string db_name;
 };
 
