@@ -1,0 +1,14 @@
+SET NAMES utf8;
+
+SET FOREIGN_KEY_CHECKS = 0;
+
+DROP TABLE IF EXISTS `snorlax_msg`;
+CREATE TABLE `snorlax_msg` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `sender` CHAR(14) NOT NULL,
+    `content` TEXT NOT NULL, -- 消息内容
+    `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- 消息发送时间
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+SET FOREIGN_KEY_CHECKS = 1;
