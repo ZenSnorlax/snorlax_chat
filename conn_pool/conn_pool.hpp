@@ -5,7 +5,9 @@
 #include <cstddef>
 #include <memory>
 #include <mutex>
+#include <optional>
 #include <queue>
+#include <stdexcept>
 #include <string>
 #include <thread>
 
@@ -31,39 +33,38 @@ class SQLConnPool {
         std::chrono::milliseconds retry_interval =
             std::chrono::milliseconds(1000)) {
         for (int attempt = 0; attempt <= max_retries; ++attempt) {
-            auto session = tryGetConnection(timeout, attempt, max_retries);
+            auto session = tryGetConnection(timeout, attempt);
             if (session) {
-                return session;
+                return std::move(session.value());
             }
             std::this_thread::sleep_for(retry_interval);
         }
-        return nullptr;
+
+        throw std::runtime_error(
+            "Failed to get a database connection after multiple attempts.");
     }
 
     void releaseConnection(std::unique_ptr<mysqlx::Session> session) {
         std::lock_guard<std::mutex> lock(mutex_);
         queue_.push(std::move(session));
         LOG(Level::DEBUG,
-            "thread ",
+            "Thread ",
             std::this_thread::get_id(),
-            " release a connection");
+            " released a connection");
         cv_.notify_one();
     }
 
     void resize(size_t newSize) {
         std::lock_guard<std::mutex> lock(mutex_);
-        if (newSize > capacity) {
-            while (capacity < newSize) {
-                queue_.push(createSession());
-                capacity++;
-            }
-        } else if (newSize < capacity) {
-            while (capacity > newSize && !queue_.empty()) {
-                queue_.pop();
-                capacity--;
-            }
+        while (capacity < newSize) {
+            queue_.push(createSession());
+            capacity++;
         }
-        LOG(Level::DEBUG, "reset connectionpool capacity");
+        while (capacity > newSize && !queue_.empty()) {
+            queue_.pop();
+            capacity--;
+        }
+        LOG(Level::DEBUG, "Connection pool resized to ", capacity);
     }
 
     SQLConnPool(const SQLConnPool&) = delete;
@@ -72,45 +73,42 @@ class SQLConnPool {
     SQLConnPool& operator=(SQLConnPool&&) = delete;
 
    private:
-    std::unique_ptr<mysqlx::Session> tryGetConnection(
-        std::chrono::milliseconds timeout, int attempt, int max_retries) {
+    std::optional<std::unique_ptr<mysqlx::Session>> tryGetConnection(
+        std::chrono::milliseconds timeout, int attempt) {
         std::unique_lock<std::mutex> lock(mutex_);
         if (cv_.wait_for(lock, timeout, [this] { return !queue_.empty(); })) {
             auto session = std::move(queue_.front());
             queue_.pop();
             LOG(Level::DEBUG,
-                "thread ",
+                "Thread ",
                 std::this_thread::get_id(),
-                " get a connection on attempt ",
+                " got a connection on attempt ",
                 attempt + 1);
             return session;
         } else {
             LOG(Level::WARNING,
-                "thread ",
+                "Thread ",
                 std::this_thread::get_id(),
                 " failed to get a connection on attempt ",
-                attempt + 1,
-                " within timeout");
-            if (attempt == max_retries) {
-                LOG(Level::ERROR,
-                    "thread ",
-                    std::this_thread::get_id(),
-                    " exhausted retries. Failed to get a connection.");
-            }
+                attempt + 1);
         }
-        return nullptr;
+        return std::nullopt;
     }
+
     SQLConnPool(SQLConfig&& config, size_t size)
-        : config_(config), capacity(size) {
+        : config_(std::move(config)), capacity(size) {
         for (size_t i = 0; i < size; ++i) {
             queue_.push(createSession());
         }
-        LOG(Level::DEBUG, "create SQLConnPool");
+        LOG(Level::DEBUG, "Created SQLConnPool with capacity ", capacity);
     }
 
     ~SQLConnPool() {
         std::lock_guard<std::mutex> lock(mutex_);
-        LOG(Level::DEBUG, "delete SQLConnPool");
+        LOG(Level::DEBUG,
+            "Deleting SQLConnPool with ",
+            queue_.size(),
+            " connections remaining.");
     }
 
     std::unique_ptr<mysqlx::Session> createSession() {
