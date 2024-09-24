@@ -30,3 +30,4 @@ CMakeLists.txt.user
 Thumbs.db                 # 忽略 Windows 的缩略图数据库文件
 
 /test/*
+config.json
