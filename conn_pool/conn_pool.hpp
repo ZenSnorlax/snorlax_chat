@@ -6,17 +6,32 @@
 #include <mutex>
 #include <optional>
 #include <queue>
-#include <string>
 #include <thread>
 
 #include "../snorlax_log.hpp"
 
-struct SQLConfig {
-    std::string host;
-    std::string user;
-    int port;
-    std::string password; 
-    std::string db_name;
+class SQLConfig {
+   private:
+    std::string host_;
+    int port_;
+    std::string user_;
+    std::string db_name_;
+    std::string password_;
+
+   public:
+    SQLConfig(std::string&& host, int port, std::string&& user,
+              std::string&& db_name, std::string&& password)
+        : host_(std::move(host)),
+          port_(port),
+          user_(user),
+          db_name_(db_name),
+          password_(password) {}
+
+    std::string getHost() { return host_; }
+    int getPort() { return port_; }
+    std::string getUser() { return user_; }
+    std::string getDbName() { return db_name_; }
+    std::string getPassword() { return password_; }
 };
 
 class SQLConnPool {
@@ -110,8 +125,10 @@ class SQLConnPool {
     }
 
     std::unique_ptr<mysqlx::Session> createSession() {
-        return std::make_unique<mysqlx::Session>(
-            config_.host, config_.port, config_.user, config_.password);
+        return std::make_unique<mysqlx::Session>(config_.getHost(),
+                                                 config_.getPort(),
+                                                 config_.getUser(),
+                                                 config_.getPassword());
     }
 
     SQLConfig config_;
