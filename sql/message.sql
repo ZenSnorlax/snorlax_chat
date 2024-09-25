@@ -2,8 +2,8 @@ SET NAMES utf8;
 
 SET FOREIGN_KEY_CHECKS = 0;
 
-DROP TABLE IF EXISTS `snorlax_msg`;
-CREATE TABLE `snorlax_msg` (
+DROP TABLE IF EXISTS snorlax_msg;
+CREATE TABLE snorlax_msg (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `sender` CHAR(14) NOT NULL,
     `content` TEXT NOT NULL, -- 消息内容

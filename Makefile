@@ -117,17 +117,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named run_sql
+# Target rules for targets named snorlax_chat
 
 # Build rule for target.
-run_sql: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 run_sql
-.PHONY : run_sql
+snorlax_chat: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 snorlax_chat
+.PHONY : snorlax_chat
 
 # fast build rule for target.
-run_sql/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_sql.dir/build.make CMakeFiles/run_sql.dir/build
-.PHONY : run_sql/fast
+snorlax_chat/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snorlax_chat.dir/build.make CMakeFiles/snorlax_chat.dir/build
+.PHONY : snorlax_chat/fast
+
+main.o: main.cpp.o
+.PHONY : main.o
+
+# target to build an object file
+main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snorlax_chat.dir/build.make CMakeFiles/snorlax_chat.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snorlax_chat.dir/build.make CMakeFiles/snorlax_chat.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/snorlax_chat.dir/build.make CMakeFiles/snorlax_chat.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -137,7 +161,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... run_sql"
+	@echo "... snorlax_chat"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 

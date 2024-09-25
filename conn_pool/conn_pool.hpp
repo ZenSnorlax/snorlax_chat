@@ -1,3 +1,4 @@
+#pragma once
 #include <mysql-cppconn/mysqlx/xdevapi.h>
 
 #include <chrono>
@@ -19,30 +20,33 @@ class SQLConfig {
     std::string password_;
 
    public:
-    SQLConfig(std::string&& host, int port, std::string&& user,
-              std::string&& db_name, std::string&& password)
-        : host_(std::move(host)),
-          port_(port),
-          user_(user),
-          db_name_(db_name),
-          password_(password) {}
+    SQLConfig(const std::string& host, int port, const std::string& user,
+              const std::string& password)
+        : host_(host), port_(port), user_(user), password_(password) {}
 
-    std::string getHost() { return host_; }
+    const std::string& getHost() const { return host_; }
     int getPort() { return port_; }
-    std::string getUser() { return user_; }
-    std::string getDbName() { return db_name_; }
-    std::string getPassword() { return password_; }
+    const std::string& getUser() const { return user_; }
+    const std::string& getPassword() const { return password_; }
 };
 
 class SQLConnPool {
    public:
-    static SQLConnPool& getInstance(SQLConfig&& config, size_t size = 10) {
+    static SQLConnPool& getInstance(SQLConfig&& config =
+                                        SQLConfig{
+                                            "localhost",
+                                            33060,
+                                            "abs",
+                                            "1510017673",
+                                        },
+                                    size_t size = 10) {
         static SQLConnPool conn_pool(std::move(config), size);
         return conn_pool;
     }
 
     std::unique_ptr<mysqlx::Session> getConnection(
-        std::chrono::milliseconds timeout, int max_retries = 3,
+        std::chrono::milliseconds timeout = std::chrono::milliseconds(3000),
+        int max_retries = 3,
         std::chrono::milliseconds retry_interval =
             std::chrono::milliseconds(1000)) {
         for (int attempt = 0; attempt <= max_retries; ++attempt) {

@@ -1,7 +1,7 @@
 SET NAMES utf8;
 
-DROP TABLE IF EXISTS `snorlax_user`;
-CREATE TABLE `snorlax_user` (
+DROP TABLE IF EXISTS snorlax_user;
+CREATE TABLE snorlax_user (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `account` CHAR(14) NOT NULL,
   `password` VARCHAR(255) NOT NULL, -- 调整长度以适应哈希密码
