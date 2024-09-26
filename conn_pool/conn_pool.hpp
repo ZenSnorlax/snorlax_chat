@@ -9,7 +9,7 @@
 #include <queue>
 #include <thread>
 
-#include "../snorlax_log.hpp"
+#include "../log/snorlax_log.hpp"
 
 class SQLConfig {
    private:
