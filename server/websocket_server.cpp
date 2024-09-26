@@ -4,7 +4,7 @@
 
 #include "../bll/message_handle_factory.hpp"
 #include "../bll/message_paraser.hpp"
-#include "../snorlax_log.hpp"
+#include "../log/snorlax_log.hpp"
 
 WebSocketSession::WebSocketSession(tcp::socket socket)
     : ws_(std::move(socket)) {}

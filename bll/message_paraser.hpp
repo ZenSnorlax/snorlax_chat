@@ -15,17 +15,28 @@ class MessageParse {
         try {
             boost::json::value jsonValue = boost::json::parse(message);
             auto jsonObject = jsonValue.as_object();
-            std::string_view typeString = jsonObject.at("type").as_string();
-            sender = jsonObject.at("sender").as_string();
-            receiver = jsonObject.at("receiver").as_string();
-            content = jsonObject.at("content").as_string();
-            messageType = parseMessageType(typeString);
+
+            // Check if required fields exist
+            if (jsonObject.contains("type") && jsonObject.contains("sender") &&
+                jsonObject.contains("receiver") &&
+                jsonObject.contains("content")) {
+                std::string_view typeString = jsonObject.at("type").as_string();
+                sender = jsonObject.at("sender").as_string();
+                receiver = jsonObject.at("receiver").as_string();
+                content = jsonObject.at("content").as_string();
+                messageType = parseMessageType(typeString);
+            } else {
+                throw std::invalid_argument(
+                    "Missing required fields in JSON message");
+            }
         } catch (const boost::json::system_error& e) {
             LOG(Level::ERROR,
                 "JSON parsing error: ",
                 e.what(),
                 " for message: ",
                 message);
+        } catch (const std::invalid_argument& e) {
+            LOG(Level::ERROR, "Error: ", e.what(), " for message: ", message);
         } catch (const std::exception& e) {
             LOG(Level::ERROR, "Error: ", e.what());
         }

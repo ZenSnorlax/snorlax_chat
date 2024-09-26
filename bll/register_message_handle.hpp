@@ -3,6 +3,7 @@
 
 #include <boost/beast/core.hpp>
 #include <boost/json.hpp>
+#include <regex>
 
 #include "../dal/user_dao.hpp"
 #include "../server/websocket_server.hpp"
@@ -18,20 +19,81 @@ class RegisterMessageHandle
                 std::unique_ptr<MessageParse> parsed_message) override {
         std::string response_message;
 
-        auto buffer = net::buffer(response_message);
-        boost::json::value jsonValue =
-            boost::json::parse(parsed_message->getContent());
-        auto jsonObject = jsonValue.as_object();
-
-        if (jsonObject.contains("account") && jsonObject.contains("password")) {
-            UserDAO::Register(
-                std::string(jsonObject.at("account").as_string()),
-                std::string(jsonObject.at("password").as_string()));
-            response_message = "Registration successful!";
-        } else {
-            response_message = "Missing account or password field";
+        try {
+            // 解析 JSON 内容并提取字段
+            auto [account, password] = parseJson(parsed_message->getContent());
+            // 验证账户和密码格式
+            response_message = validateAndRegister(account, password);
+        } catch (const std::exception& e) {
+            // 处理注册或 JSON 解析期间的异常
+            LOG(Level::ERROR, "Registration failed: ", e.what());
+            response_message =
+                R"({"status":"error", "message":"Invalid input"})";
         }
 
+        // 发送响应回 WebSocket 客户端
+        sendResponse(session, response_message);
+    }
+
+   private:
+    // 解析 JSON 并提取账户和密码
+    std::pair<std::string, std::string> parseJson(const std::string& content) {
+        boost::json::value jsonValue = boost::json::parse(content);
+        auto jsonObject = jsonValue.as_object();
+
+        if (!jsonObject.contains("account") ||
+            !jsonObject.contains("password")) {
+            throw std::invalid_argument(
+                "Missing account or password in content");
+        }
+
+        std::string account = jsonObject["account"].as_string().c_str();
+        std::string password = jsonObject["password"].as_string().c_str();
+        return {account, password};
+    }
+
+    // 验证账户和密码格式并注册
+    std::string validateAndRegister(const std::string& account,
+                                    const std::string& password) {
+        // 定义正则表达式进行验证
+        std::regex account_regex("^[A-Za-z]{10}$");  // 账户必须是10个字母
+        std::regex password_regex("^[0-9]{10}$");  // 密码必须是10个数字
+
+        if (!std::regex_match(account, account_regex) ||
+            !std::regex_match(password, password_regex)) {
+            return generateErrorResponse(account, password);
+        } else {
+            // 调用 UserDAO::Register 函数注册用户
+            std::string result = UserDAO::Register(account, password);
+            return generateResponse(result);
+        }
+    }
+
+    // 生成错误响应
+    std::string generateErrorResponse(const std::string& account,
+                                      const std::string& password) {
+        std::string error_message = R"({"status":"error", "message":")";
+        error_message +=
+            !std::regex_match(account, std::regex("^[A-Za-z]{10}$"))
+                ? "Account must contain only letters"
+                : "Password must contain only digits";
+        error_message += R"("})";
+        return error_message;
+    }
+
+    // 生成响应
+    std::string generateResponse(const std::string& result) {
+        return (result == "Register successful")
+                   ? R"({"status":"success", "message":"User registered successfully"})"
+               : (result == "User already exists")
+                   ? R"({"status":"error", "message":"User already exists"})"
+                   : R"({"status":"error", "message":"Registration failed"})";
+    }
+
+    // 发送响应回 WebSocket 客户端
+    void sendResponse(std::shared_ptr<WebSocketSession> session,
+                      const std::string& response_message) {
+        auto buffer = net::buffer(response_message);
         session->getWebSocketStream().async_write(
             buffer,
             [self = shared_from_this()](beast::error_code ec,
