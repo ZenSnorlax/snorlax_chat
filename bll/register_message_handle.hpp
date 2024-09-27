@@ -19,17 +19,9 @@ class RegisterMessageHandle
                 std::unique_ptr<MessageParse> parsed_message) override {
         std::string response_message;
 
-        try {
-            // 解析 JSON 内容并提取字段
-            auto [account, password] = parseJson(parsed_message->getContent());
-            // 验证账户和密码格式
-            response_message = validateAndRegister(account, password);
-        } catch (const std::exception& e) {
-            // 处理注册或 JSON 解析期间的异常
-            LOG(Level::ERROR, "Registration failed: ", e.what());
-            response_message =
-                R"({"status":"error", "message":"Invalid input"})";
-        }
+        auto [account, password] = parseJson(parsed_message->getContent());
+        // 验证账户和密码格式
+        response_message = validateAndRegister(account, password);
 
         // 发送响应回 WebSocket 客户端
         sendResponse(session, response_message);
