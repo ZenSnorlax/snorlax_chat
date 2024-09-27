@@ -55,14 +55,18 @@ class MessageParse {
 
     MessageType parseMessageType(std::string_view type) {
         static const std::unordered_map<std::string_view, MessageType> typeMap =
-            {{"REGISTER", MessageType::REGISTER},
-             {"LOGIN", LOGIN},
-             {"LOGOUT", LOGOUT},
-             {"TEXT_MESSAGE", TEXT_MESSAGE},
-             {"IMAGE_MESSAGE", IMAGE_MESSAGE},
-             {"FILE_TRANSFER", FILE_TRANSFER},
-             {"HEARTBEAT", HEARTBEAT},
-             {"SYSTEM_MESSAGE", SYSTEM_MESSAGE}};
+            {
+                {"REGISTER", MessageType::REGISTER},
+                {"LOGIN", LOGIN},
+                {"LOGOUT", LOGOUT},
+                {"TEXT_MESSAGE", TEXT_MESSAGE},
+                {"IMAGE_MESSAGE", IMAGE_MESSAGE},
+                {"FILE_TRANSFER", FILE_TRANSFER},
+                {"HEARTBEAT", HEARTBEAT},
+                {"SYSTEM_MESSAGE", SYSTEM_MESSAGE},
+                {"CREATE_DUAL_CHAT", CREATE_DUAL_CHAT},
+                {" CREATE_MULT_CHAT", CREATE_MULT_CHAT},
+            };
 
         auto it = typeMap.find(type);
         if (it != typeMap.end()) {

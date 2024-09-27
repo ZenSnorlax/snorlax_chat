@@ -71,6 +71,7 @@ void WebSocketSession::handle_message(const std::string& message) {
     // 读取下一条消息
     read_message();
 }
+
 void WebSocketSession::checkLoginStatus(MessageType message_type) {
     if (!is_login && message_type != LOGIN && message_type != REGISTER) {
         std::string response_message =

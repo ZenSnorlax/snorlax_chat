@@ -6,12 +6,15 @@
 enum MessageType {
     REGISTER,
     LOGIN,
+
     LOGOUT,
     TEXT_MESSAGE,
     IMAGE_MESSAGE,
     FILE_TRANSFER,
     HEARTBEAT,
-    SYSTEM_MESSAGE
+    SYSTEM_MESSAGE,
+    CREATE_DUAL_CHAT,
+    CREATE_MULT_CHAT,
 };
 
 class Message {
