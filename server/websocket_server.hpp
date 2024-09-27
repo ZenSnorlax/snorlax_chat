@@ -2,7 +2,7 @@
 #include <boost/beast.hpp>
 #include <boost/beast/websocket/stream.hpp>
 #include <memory>
-#include "../bll/message_paraser.hpp"
+#include "../bll/message_parser.hpp"
 
 namespace net = boost::asio;
 using tcp = net::ip::tcp;

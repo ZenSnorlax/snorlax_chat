@@ -3,18 +3,18 @@
 
 #include <memory>
 
-#include "message_paraser.hpp"
+#include "message_parser.hpp"
 #include "message.hpp"
 class WebSocketSession;
 
-class MessageHandle {
+class MessageHandler {
    public:
     virtual void handle(std::shared_ptr<WebSocketSession> session,
-                        std::unique_ptr<MessageParse> parsed_message) = 0;
-    virtual ~MessageHandle() {}
+                        std::unique_ptr<MessageParser> parsed_message) = 0;
+    virtual ~MessageHandler() {}
 
    protected:
-    MessageHandle(const Message& message) : message_(message) {}
+    MessageHandler(const Message& message) : message_(message) {}
     Message message_;
 };
 

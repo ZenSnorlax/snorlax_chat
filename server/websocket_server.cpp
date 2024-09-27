@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "../bll/message_handle_factory.hpp"
+#include "../bll/handler_factory.hpp"
 #include "../log/snorlax_log.hpp"
 
 WebSocketSession::WebSocketSession(tcp::socket socket)
@@ -51,7 +51,7 @@ void WebSocketSession::on_read(beast::error_code ec,
 
 void WebSocketSession::handle_message(const std::string& message) {
     // 使用智能指针管理 MessageParse 对象
-    auto parsed_message = std::make_unique<MessageParse>(message);
+    auto parsed_message = std::make_unique<MessageParser>(message);
 
     checkLoginStatus(parsed_message->getMessageType());
     // 使用工厂类创建其他消息处理器
@@ -60,7 +60,7 @@ void WebSocketSession::handle_message(const std::string& message) {
                             parsed_message->getReceiver(),
                             parsed_message->getContent());
 
-    auto message_handle = MessageHandleFactory::createHandle(message_);
+    auto message_handle = HandlerFactory::createHandle(message_);
     if (message_handle) {
         message_handle->handle(shared_from_this(), std::move(parsed_message));
     } else {

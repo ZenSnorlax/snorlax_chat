@@ -8,9 +8,9 @@
 #include "../log/snorlax_log.hpp"
 #include "message.hpp"
 
-class MessageParse {
+class MessageParser {
    public:
-    MessageParse(const std::string& message)
+    MessageParser(const std::string& message)
         : messageType(LOGOUT), sender(""), receiver(""), content("") {
         try {
             boost::json::value jsonValue = boost::json::parse(message);

@@ -7,16 +7,16 @@
 
 #include "../dal/user_dao.hpp"
 #include "../server/websocket_server.hpp"
-#include "message_handle.hpp"
+#include "message_handler.hpp"
 
-class RegisterMessageHandle
-    : public MessageHandle,
-      public std::enable_shared_from_this<RegisterMessageHandle> {
+class RegisterHandler
+    : public MessageHandler,
+      public std::enable_shared_from_this<RegisterHandler> {
    public:
-    RegisterMessageHandle(const Message& message) : MessageHandle(message) {}
+    RegisterHandler(const Message& message) : MessageHandler(message) {}
 
     void handle(std::shared_ptr<WebSocketSession> session,
-                std::unique_ptr<MessageParse> parsed_message) override {
+                std::unique_ptr<MessageParser> parsed_message) override {
         std::string response_message;
 
         auto [account, password] = parseJson(parsed_message->getContent());
