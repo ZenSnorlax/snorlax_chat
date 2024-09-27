@@ -46,7 +46,7 @@ class SQLConnPool {
 
     std::unique_ptr<mysqlx::Session> getConnection(
         std::chrono::milliseconds timeout = std::chrono::milliseconds(3000),
-        int max_retries = 3,
+        int max_retries = 10,
         std::chrono::milliseconds retry_interval =
             std::chrono::milliseconds(1000)) {
         for (int attempt = 0; attempt <= max_retries; ++attempt) {

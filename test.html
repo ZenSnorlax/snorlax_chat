@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Client</title>
+    <script>
+        let ws;
+
+        function initWebSocket() {
+            ws = new WebSocket('ws://localhost:8080'); // 替换为您的服务器地址和端口
+
+            ws.onopen = () => {
+                console.log('WebSocket connection established.');
+            };
+
+            ws.onmessage = (event) => {
+                const response = JSON.parse(event.data);
+                console.log('Received:', response);
+                alert(`Response: ${response.message}`);
+            };
+
+            ws.onclose = () => {
+                console.log('WebSocket connection closed.');
+            };
+
+            ws.onerror = (error) => {
+                console.error('WebSocket error:', error);
+            };
+        }
+
+        function register() {
+            const account = document.getElementById('registerAccount').value;
+            const password = document.getElementById('registerPassword').value;
+            const message = {
+                type: "REGISTER",
+                sender: account,
+                receiver: "server",
+                content: JSON.stringify({ account, password })
+            };
+            ws.send(JSON.stringify(message));
+        }
+
+        function login() {
+            const account = document.getElementById('loginAccount').value;
+            const password = document.getElementById('loginPassword').value;
+            const message = {
+                type: "LOGIN",
+                sender: account,
+                receiver: "server",
+                content: JSON.stringify({ account, password })
+            };
+            ws.send(JSON.stringify(message));
+        }
+
+        window.onload = () => {
+            initWebSocket();
+        };
+    </script>
+</head>
+<body>
+    <h2>Register</h2>
+    <input type="text" id="registerAccount" placeholder="Account (10 letters)">
+    <input type="password" id="registerPassword" placeholder="Password (10 digits)">
+    <button onclick="register()">Register</button>
+
+    <h2>Login</h2>
+    <input type="text" id="loginAccount" placeholder="Account (10 letters)">
+    <input type="password" id="loginPassword" placeholder="Password (10 digits)">
+    <button onclick="login()">Login</button>
+</body>
+</html>
