@@ -55,7 +55,7 @@ class MessageParse {
 
     MessageType parseMessageType(std::string_view type) {
         static const std::unordered_map<std::string_view, MessageType> typeMap =
-            {{"REGISTER", REGISTER},
+            {{"REGISTER", MessageType::REGISTER},
              {"LOGIN", LOGIN},
              {"LOGOUT", LOGOUT},
              {"TEXT_MESSAGE", TEXT_MESSAGE},

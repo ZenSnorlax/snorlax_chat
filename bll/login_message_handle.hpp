@@ -6,12 +6,14 @@
 #include <memory>
 #include <regex>
 
+#include "../dal/user_dao.hpp"
 #include "../server/websocket_server.hpp"
 #include "message_handle.hpp"
-#include "../dal/user_dao.hpp"
 
-class LoginMessageHandle : public MessageHandle, public std::enable_shared_from_this<LoginMessageHandle> {
-public:
+class LoginMessageHandle
+    : public MessageHandle,
+      public std::enable_shared_from_this<LoginMessageHandle> {
+   public:
     LoginMessageHandle(const Message& message) : MessageHandle(message) {}
 
     void handle(std::shared_ptr<WebSocketSession> session,
@@ -22,18 +24,22 @@ public:
         // 验证账户和密码格式
         response_message = validateAndLogin(account, password);
 
+        if (response_message == "Login successful") session->setLogin();
+
         // 发送响应回 WebSocket 客户端
         sendResponse(session, response_message);
     }
 
-private:
+   private:
     // 解析 JSON 并提取账户和密码
     std::pair<std::string, std::string> parseJson(const std::string& content) {
         boost::json::value jsonValue = boost::json::parse(content);
         auto jsonObject = jsonValue.as_object();
 
-        if (!jsonObject.contains("account") || !jsonObject.contains("password")) {
-            throw std::invalid_argument("Missing account or password in content");
+        if (!jsonObject.contains("account") ||
+            !jsonObject.contains("password")) {
+            throw std::invalid_argument(
+                "Missing account or password in content");
         }
 
         std::string account = jsonObject["account"].as_string().c_str();
@@ -76,7 +82,7 @@ private:
             return R"({"status":"success", "message":"Login successful"})";
         } else if (result == "Invalid credentials") {
             return R"({"status":"error", "message":"Invalid account or password"})";
-        } else if (result == "User does not exist") { // 添加用户不存在的情况
+        } else if (result == "User does not exist") {  // 添加用户不存在的情况
             return R"({"status":"error", "message":"User does not exist"})";
         } else {
             return R"({"status":"error", "message":"Login failed"})";

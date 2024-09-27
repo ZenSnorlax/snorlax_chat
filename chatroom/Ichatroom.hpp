@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <unordered_set>
 #include <vector>
 
 // 基类，定义聊天房间的接口
@@ -7,7 +8,10 @@ class IChatRoom {
    public:
     virtual ~IChatRoom() = default;
     virtual void join(const std::string& user) = 0;  // 用户加入房间
-    virtual void sendMessage(const std::string& message) = 0;  // 发送消息
+    virtual void sendMessage(const std::string& message,
+                             const std::string& sender) = 0;  // 发送消息
+   protected:
+    std::vector<std::string> messages;  // 存储消息记录
 };
 
 // 双人聊天房间类
@@ -21,32 +25,36 @@ class DualChatRoom : public IChatRoom {
         : user1(u1), user2(u2) {}
 
     void join(const std::string& user) override {
-        // 可添加逻辑以检查是否可以加入
+        // 可添加逻辑以检查是否可以加入（例如：如果已经有两个用户，则拒绝）
     }
 
-    void sendMessage(const std::string& message) override {
+    void sendMessage(const std::string& message,
+                     const std::string& sender) override {
         // 发送消息给另一个用户
-        // 这里可以实现消息发送逻辑
-        std::cout << user1 << " and " << user2
-                  << " received message: " << message << std::endl;
+        std::cout << sender << " to " << (sender == user1 ? user2 : user1)
+                  << ": " << message << std::endl;
+        messages.push_back(message);  // 记录消息
     }
 };
 
 // 多人聊天房间类
 class MultiChatRoom : public IChatRoom {
    private:
-    std::vector<std::string> users;
+    std::unordered_set<std::string> users;  // 使用集合避免重复用户
 
    public:
     void join(const std::string& user) override {
-        users.push_back(user);
+        users.insert(user);  // 添加用户
         std::cout << user << " joined the group chat." << std::endl;
     }
 
-    void sendMessage(const std::string& message) override {
+    void sendMessage(const std::string& message,
+                     const std::string& sender) override {
         // 发送消息给所有用户
         for (const auto& user : users) {
-            std::cout << user << " received message: " << message << std::endl;
+            std::cout << sender << " to " << user << ": " << message
+                      << std::endl;
         }
+        messages.push_back(message);  // 记录消息
     }
 };
