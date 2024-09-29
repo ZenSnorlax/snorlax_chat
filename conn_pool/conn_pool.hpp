@@ -11,36 +11,17 @@
 
 #include "../log/snorlax_log.hpp"
 
-class SQLConfig {
-   private:
-    std::string host_;
-    int port_;
-    std::string user_;
-    std::string db_name_;
-    std::string password_;
-
-   public:
-    SQLConfig(const std::string& host, int port, const std::string& user,
-              const std::string& password)
-        : host_(host), port_(port), user_(user), password_(password) {}
-
-    const std::string& getHost() const { return host_; }
-    int getPort() { return port_; }
-    const std::string& getUser() const { return user_; }
-    const std::string& getPassword() const { return password_; }
+struct Config {
+    std::string host;
+    int port;
+    std::string user;
+    std::string password;
 };
 
-class SQLConnPool {
+class ConnectionPool {
    public:
-    static SQLConnPool& getInstance(SQLConfig&& config =
-                                        SQLConfig{
-                                            "localhost",
-                                            33060,
-                                            "abs",
-                                            "1510017673",
-                                        },
-                                    size_t size = 10) {
-        static SQLConnPool conn_pool(std::move(config), size);
+    static ConnectionPool& getInstance(Config& config, size_t size = 10) {
+        static ConnectionPool conn_pool(std::move(config), size);
         return conn_pool;
     }
 
@@ -56,9 +37,7 @@ class SQLConnPool {
             }
             std::this_thread::sleep_for(retry_interval);
         }
-
-        throw std::runtime_error(
-            "Failed to get a database connection after multiple attempts.");
+        return nullptr;
     }
 
     void releaseConnection(std::unique_ptr<mysqlx::Session> session) {
@@ -84,11 +63,6 @@ class SQLConnPool {
         LOG(Level::DEBUG, "Connection pool resized to ", capacity);
     }
 
-    SQLConnPool(const SQLConnPool&) = delete;
-    SQLConnPool& operator=(const SQLConnPool&) = delete;
-    SQLConnPool(SQLConnPool&&) = delete;
-    SQLConnPool& operator=(SQLConnPool&&) = delete;
-
    private:
     std::optional<std::unique_ptr<mysqlx::Session>> tryGetConnection(
         std::chrono::milliseconds timeout, int attempt) {
@@ -112,30 +86,28 @@ class SQLConnPool {
         return std::nullopt;
     }
 
-    SQLConnPool(SQLConfig&& config, size_t size)
+    ConnectionPool(Config&& config, size_t size)
         : config_(std::move(config)), capacity(size) {
         for (size_t i = 0; i < size; ++i) {
             queue_.push(createSession());
         }
-        LOG(Level::DEBUG, "Created SQLConnPool with capacity ", capacity);
+        LOG(Level::DEBUG, "Created ConnectionPool with capacity ", capacity);
     }
 
-    ~SQLConnPool() {
+    ~ConnectionPool() {
         std::lock_guard<std::mutex> lock(mutex_);
         LOG(Level::DEBUG,
-            "Deleting SQLConnPool with ",
+            "Deleting ConnectionPool with ",
             queue_.size(),
             " connections remaining.");
     }
 
     std::unique_ptr<mysqlx::Session> createSession() {
-        return std::make_unique<mysqlx::Session>(config_.getHost(),
-                                                 config_.getPort(),
-                                                 config_.getUser(),
-                                                 config_.getPassword());
+        return std::make_unique<mysqlx::Session>(
+            config_.host, config_.port, config_.user, config_.password);
     }
 
-    SQLConfig config_;
+    Config config_;
     std::queue<std::unique_ptr<mysqlx::Session>> queue_;
     std::mutex mutex_;
     std::condition_variable cv_;
