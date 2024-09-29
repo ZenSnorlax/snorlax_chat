@@ -31,28 +31,19 @@ class UserDAO {
    public:
     static std::string Register(const std::string& account,
                                 const std::string& password) {
-        ConnectionGuard connGuard(
-            SQLConnPool::getInstance()
-                .getConnection());  // 使用 ConnectionGuard
+        ConnectionGuard connGuard(SQLConnPool::getInstance().getConnection());
         try {
             connGuard->startTransaction();  // 开始事务
 
-            // 获取用户表并检查账号是否存在
-            mysqlx::Table usersTable =
-                connGuard->getSchema("snorlax_chat").getTable("snorlax_user");
-
-            mysqlx::RowResult result = usersTable.select("account")
-                                           .where("account = :account")
-                                           .bind("account", account)
-                                           .execute();
-
-            if (result.count() > 0) {
+            if (userExists(account)) {
                 connGuard->rollback();  // 如果用户已存在，则回滚事务
                 LOG(Level::WARNING, "User already exists: ", account);
                 return "User already exists";
             }
 
             // 插入新用户
+            mysqlx::Table usersTable =
+                connGuard->getSchema("snorlax_chat").getTable("snorlax_user");
             usersTable.insert("account", "password")
                 .values(account, password)
                 .execute();
@@ -70,26 +61,17 @@ class UserDAO {
 
     static std::string Login(const std::string& account,
                              const std::string& password) {
-        ConnectionGuard connGuard(
-            SQLConnPool::getInstance()
-                .getConnection());  // 使用 ConnectionGuard
+        ConnectionGuard connGuard(SQLConnPool::getInstance().getConnection());
         try {
-            // 获取 snorlax_user 表并检查用户是否存在
-            mysqlx::Table usersTable =
-                connGuard->getSchema("snorlax_chat").getTable("snorlax_user");
-
             // 检查用户是否存在
-            mysqlx::RowResult userCheckResult = usersTable.select("account")
-                                                    .where("account = :account")
-                                                    .bind("account", account)
-                                                    .execute();
-
-            if (userCheckResult.count() == 0) {
+            if (!userExists(account)) {
                 LOG(Level::WARNING, "User does not exist: ", account);
                 return "User does not exist";  // 返回用户不存在的消息
             }
 
-            // 用户存在，接下来检查密码是否正确
+            // 检查密码是否正确
+            mysqlx::Table usersTable =
+                connGuard->getSchema("snorlax_chat").getTable("snorlax_user");
             mysqlx::RowResult passwordCheckResult =
                 usersTable.select("password")
                     .where("account = :account AND password = :password")
@@ -109,5 +91,17 @@ class UserDAO {
             LOG(Level::ERROR, "Login failed for user: ", e.what());
             return "Login failed";
         }
+    }
+
+    static bool userExists(const std::string& account) {
+        // 创建连接并检查用户是否存在
+        ConnectionGuard connGuard(SQLConnPool::getInstance().getConnection());
+        mysqlx::Table usersTable =
+            connGuard->getSchema("snorlax_chat").getTable("snorlax_user");
+        mysqlx::RowResult result = usersTable.select("account")
+                                       .where("account = :account")
+                                       .bind("account", account)
+                                       .execute();
+        return result.count() > 0;  // 返回用户是否存在
     }
 };
