@@ -21,9 +21,6 @@ class SnorlaxLog {
         return logger;
     }
 
-    SnorlaxLog(const SnorlaxLog &) = delete;
-    SnorlaxLog &operator=(const SnorlaxLog &) = delete;
-
     void setLevel(Level level) {
         std::lock_guard<std::mutex> lock(mutex_);
         current_level_ = level;
