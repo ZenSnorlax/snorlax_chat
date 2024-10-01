@@ -13,6 +13,8 @@ add_definitions(-DSTATIC_CONCPP)
 
 include_directories(/usr/include/mysql-cppconn-8)
 
+include_directories(include)  
+
 add_executable(snorlax_chat ${SOURCE_FILES})
 
 target_link_libraries(snorlax_chat

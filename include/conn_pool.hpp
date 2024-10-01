@@ -9,7 +9,7 @@
 #include <queue>
 #include <thread>
 
-#include "../log/snorlax_log.hpp"
+#include "snorlax_log.hpp"
 
 struct Config {
     std::string host;
