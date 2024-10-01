@@ -1,5 +1,3 @@
 #include <iostream>
 
-int main(int, char**){
-    std::cout << "Hello, from snorlax_chat!\n";
-}
+int main(int argc, char* argv[]) { std::cout << "Hello, from snorlax_chat!\n"; }
