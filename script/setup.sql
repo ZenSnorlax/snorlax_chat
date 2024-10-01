@@ -1,7 +1,11 @@
+-- disable foreign key
+SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS user_room_relations;
 DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS chat_rooms;
+-- enable foreign key
+SET FOREIGN_KEY_CHECKS=1;
 
 -- create users table
 CREATE TABLE users (
