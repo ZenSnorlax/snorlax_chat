@@ -9,7 +9,6 @@ sql_file = 'setup.sql'
 # construct the command
 command = f'mysql -u {user} -p{password} {database} < {sql_file}'
 
-
 try:
     subprocess.run(command, shell=True, check=True)
     print("SQL file executed successfully.")
