@@ -1,8 +1,3 @@
 /build
-/.cache
-/CMakeFiles
 Makefile
-cmake*
-CTest*
-CMake*
 /test
