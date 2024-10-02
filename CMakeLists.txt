@@ -40,14 +40,14 @@ enable_testing()
 find_package(GTest REQUIRED)  
 include_directories(${GTEST_INCLUDE_DIRS})  
 
-set(TEST_FILES test/test_main.cpp test/test_connPool.cpp) 
+set(TEST_FILES  test/test_connPool.cpp) 
 
-add_executable(snorlax_chat_tests ${TEST_FILES}) 
+add_executable(test_connPool ${TEST_FILES}) 
 
-target_link_libraries(snorlax_chat_tests
+target_link_libraries(test_connPool
     ${GTEST_LIBRARIES}  
     pthread 
     ${SNORLAX_MYSQL}    
 )
 
-add_test(NAME snorlax_chat_tests COMMAND snorlax_chat_tests)
+add_test(NAME test_connPool COMMAND test_connPool)
