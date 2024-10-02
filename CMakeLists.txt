@@ -29,11 +29,9 @@ include_directories(include)
 
 add_executable(snorlax_chat ${SOURCE_FILES})
 
+set(SNORLAX_MYSQL "/usr/lib64/libmysqlcppconnx-static.a" "ssl" "crypto" "resolv" )
 target_link_libraries(snorlax_chat
-    /usr/lib64/libmysqlcppconnx-static.a  
-    ssl  
-    crypto  
-    resolv  
+    ${SNORLAX_MYSQL}
 )
 
 
@@ -41,13 +39,15 @@ target_link_libraries(snorlax_chat
 enable_testing()  
 find_package(GTest REQUIRED)  
 include_directories(${GTEST_INCLUDE_DIRS})  
-set(TEST_FILES test/test_main.cpp) 
+
+set(TEST_FILES test/test_main.cpp test/test_connPool.cpp) 
 
 add_executable(snorlax_chat_tests ${TEST_FILES}) 
 
 target_link_libraries(snorlax_chat_tests
     ${GTEST_LIBRARIES}  
-    pthread  
+    pthread 
+    ${SNORLAX_MYSQL}    
 )
 
 add_test(NAME snorlax_chat_tests COMMAND snorlax_chat_tests)
