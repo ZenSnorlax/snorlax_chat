@@ -50,4 +50,12 @@ target_link_libraries(test_connPool
     ${SNORLAX_MYSQL}    
 )
 
+add_executable(test_users_dao test/test_users_dao.cpp dal/users_dao.cpp)
+
+target_link_libraries(test_users_dao ${SNORLAX_MYSQL} 
+    ${GTEST_LIBRARIES}  
+    pthread )
+
 add_test(NAME test_connPool COMMAND test_connPool)
+
+add_test(NAME test_users_dao COMMAND test_users_dao )

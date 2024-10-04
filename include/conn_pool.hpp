@@ -79,7 +79,7 @@ class ConnectionPool {
 
 class ConnectionGuard {
    public:
-    ConnectionGuard(mysqlx::Session *conn) : conn_(conn) {
+    explicit ConnectionGuard(mysqlx::Session *conn) : conn_(conn) {
         conn_->startTransaction();
     }
 
