@@ -1,6 +1,7 @@
 #include "conn_pool.hpp"
 #include "dao.hpp"
 
+// 检查邮箱是否存在
 bool UsersDao::emailExists(const std::string &email) {
     auto session_guard =
         ConnectionGuard(ConnectionPool::getInstance().getConnection());
@@ -15,6 +16,7 @@ bool UsersDao::emailExists(const std::string &email) {
     return result.count() > 0;
 }
 
+// 插入新用户
 void UsersDao::insert(const std::string &username, const std::string &password,
                       const std::string &email) {
     auto session_guard =
@@ -22,11 +24,15 @@ void UsersDao::insert(const std::string &username, const std::string &password,
     auto db_schema = session_guard->getSchema(db_name_);
     auto table_schema = db_schema.getTable(table_name_);
 
-    auto result = table_schema.insert("username", "password_hash", "email", "status")
-                      .values(username, password, email, "inactive")
-                      .execute();
+    std::string statusStr =
+        statusToString(UserStatus::Inactive);  // 转换状态为字符串
+
+    table_schema.insert("username", "password_hash", "email", "status")
+        .values(username, password, email, statusStr)
+        .execute();
 }
 
+// 检查用户名是否存在
 bool UsersDao::usernameExists(const std::string &username) {
     auto session_guard =
         ConnectionGuard(ConnectionPool::getInstance().getConnection());
@@ -41,21 +47,24 @@ bool UsersDao::usernameExists(const std::string &username) {
     return result.count() > 0;
 }
 
+// 验证用户名和密码是否匹配
 bool UsersDao::match(const std::string &username, const std::string &password) {
     auto session_guard =
         ConnectionGuard(ConnectionPool::getInstance().getConnection());
     auto db_schema = session_guard->getSchema(db_name_);
     auto table_schema = db_schema.getTable(table_name_);
 
-    auto result = table_schema.select("username", "password_hash")
-                      .where("username = :username AND password_hash = :password")
-                      .bind("username", username)
-                      .bind("password", password)
-                      .execute();
+    auto result =
+        table_schema.select("username", "password_hash")
+            .where("username = :username AND password_hash = :password")
+            .bind("username", username)
+            .bind("password", password)
+            .execute();
 
     return result.count() > 0;
 }
 
+// 删除用户
 void UsersDao::deleteuser(const std::string &username,
                           const std::string &password) {
     auto session_guard =
@@ -63,9 +72,58 @@ void UsersDao::deleteuser(const std::string &username,
     auto db_schema = session_guard->getSchema(db_name_);
     auto table_schema = db_schema.getTable(table_name_);
 
-    auto result = table_schema.remove()
-                      .where("username = :username AND password_hash = :password")
+    table_schema.remove()
+        .where("username = :username AND password_hash = :password")
+        .bind("username", username)
+        .bind("password", password)
+        .execute();
+}
+
+// 设置用户状态
+void UsersDao::setStatus(const std::string &username, UserStatus status) {
+    auto session_guard =
+        ConnectionGuard(ConnectionPool::getInstance().getConnection());
+    auto db_schema = session_guard->getSchema(db_name_);
+    auto table_schema = db_schema.getTable(table_name_);
+
+    std::string statusStr =
+        statusToString(status);  // 将 UserStatus 转换为字符串
+
+    table_schema.update()
+        .set("status", statusStr)
+        .where("username = :username")
+        .bind("username", username)
+        .execute();
+}
+
+// 获取用户状态
+UserStatus UsersDao::getStatus(const std::string &username) {
+    auto session_guard =
+        ConnectionGuard(ConnectionPool::getInstance().getConnection());
+    auto db_schema = session_guard->getSchema(db_name_);
+    auto table_schema = db_schema.getTable(table_name_);
+
+    auto result = table_schema.select("status")
+                      .where("username = :username")
                       .bind("username", username)
-                      .bind("password", password)
                       .execute();
+
+    auto row = result.fetchOne();
+    if (row) {
+        std::string status = row[0].get<std::string>();
+        return (status == "active") ? UserStatus::Active : UserStatus::Inactive;
+    }
+    return UserStatus::Inactive;  // 默认值
+}
+
+// 将 UserStatus 转换为字符串
+std::string UsersDao::statusToString(UserStatus status) {
+    switch (status) {
+        case UserStatus::Active:
+            return "active";
+        case UserStatus::Inactive:
+            return "inactive";
+        default:
+            return "unknown";  // 处理未定义状态
+    }
 }

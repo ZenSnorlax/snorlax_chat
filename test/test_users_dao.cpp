@@ -15,33 +15,45 @@ class UsersDaoTest : public ::testing::Test {
 
     ~UsersDaoTest() { delete usersDao; }
 
-    void SetUp() override {}
+    void SetUp() override {
+        // 在每个测试之前清理数据库
+        usersDao->deleteuser("test", "test");  // 确保用户不存在
+    }
 
-    void TearDown() override {}
+    void TearDown() override {
+        // 可选：每个测试之后的清理
+        usersDao->deleteuser("test", "test");
+    }
 };
 
 TEST_F(UsersDaoTest, TestEmailExists) {
-    if (!usersDao->emailExists("test@example.com"))
-        usersDao->insert("test", "test", "test@example.com");
+    usersDao->insert("test", "test", "test@example.com");
     ASSERT_TRUE(usersDao->emailExists("test@example.com"));
 }
+
 TEST_F(UsersDaoTest, TestUsernameExists) {
-    if (!usersDao->usernameExists("test"))
-        usersDao->insert("test", "test", "test@example.com");
+    usersDao->insert("test", "test", "test@example.com");
     ASSERT_TRUE(usersDao->usernameExists("test"));
 }
+
 TEST_F(UsersDaoTest, TestMatch) {
-    if (!usersDao->usernameExists("test"))
-        usersDao->insert("test", "test", "test@example.com");
+    usersDao->insert("test", "test", "test@example.com");
     ASSERT_TRUE(usersDao->match("test", "test"));
-    ASSERT_FALSE(usersDao->match("test", "test1"));
+    ASSERT_FALSE(usersDao->match("test", "wrongpassword"));
 }
+
 TEST_F(UsersDaoTest, TestDeleteUser) {
-    if (!usersDao->usernameExists("test"))
-        usersDao->insert("test", "test", "test@example.com");
+    usersDao->insert("test", "test", "test@example.com");
     usersDao->deleteuser("test", "test");
     ASSERT_FALSE(usersDao->usernameExists("test"));
 }
+
+TEST_F(UsersDaoTest, TestSetStatus) {
+    usersDao->insert("test", "test", "test@example.com");
+    usersDao->setStatus("test", UserStatus::Inactive);
+    ASSERT_EQ(usersDao->getStatus("test"), UserStatus::Inactive);
+}
+
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
