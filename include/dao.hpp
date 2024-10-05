@@ -14,6 +14,8 @@ class UsersDao {
 
     bool match(const std::string& username, const std::string& password);
 
+    void deleteuser(const std::string& username, const std::string& password);
+
    private:
     std::string db_name_;
     std::string table_name_;
