@@ -2,6 +2,8 @@
 
 enum class UserStatus { Active, Inactive };
 
+enum class UserRole { admin, member };
+
 class UsersDao {
    public:
     static bool emailExists(const std::string &email);
@@ -38,13 +40,15 @@ class ChatRoomsDao {
     static std::string table_name_;
 };
 
-class UsersRoomRelationsDao {
+class UserRoomRelationsDao {
    public:
-    static void insert(int user_id, int room_id);
+    static void insert(int user_id, int room_id, UserRole role);
 
     static bool userRoomExists(int user_id, int room_id);
 
    private:
     static std::string db_name_;
     static std::string table_name_;
+
+    static std::string roleToString(UserRole role);
 };
