@@ -25,7 +25,23 @@ TEST_F(UsersDaoTest, TestEmailExists) {
         usersDao->insert("test", "test", "test@example.com");
     ASSERT_TRUE(usersDao->emailExists("test@example.com"));
 }
-
+TEST_F(UsersDaoTest, TestUsernameExists) {
+    if (!usersDao->usernameExists("test"))
+        usersDao->insert("test", "test", "test@example.com");
+    ASSERT_TRUE(usersDao->usernameExists("test"));
+}
+TEST_F(UsersDaoTest, TestMatch) {
+    if (!usersDao->usernameExists("test"))
+        usersDao->insert("test", "test", "test@example.com");
+    ASSERT_TRUE(usersDao->match("test", "test"));
+    ASSERT_FALSE(usersDao->match("test", "test1"));
+}
+TEST_F(UsersDaoTest, TestDeleteUser) {
+    if (!usersDao->usernameExists("test"))
+        usersDao->insert("test", "test", "test@example.com");
+    usersDao->deleteuser("test", "test");
+    ASSERT_FALSE(usersDao->usernameExists("test"));
+}
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

@@ -48,7 +48,7 @@ bool UsersDao::match(const std::string &username, const std::string &password) {
     auto table_schema = db_schema.getTable(table_name_);
 
     auto result = table_schema.select("username", "password_hash")
-                      .where("username = :username AND password = :password")
+                      .where("username = :username AND password_hash = :password")
                       .bind("username", username)
                       .bind("password", password)
                       .execute();
@@ -64,7 +64,7 @@ void UsersDao::deleteuser(const std::string &username,
     auto table_schema = db_schema.getTable(table_name_);
 
     auto result = table_schema.remove()
-                      .where("username = :username AND password = :password")
+                      .where("username = :username AND password_hash = :password")
                       .bind("username", username)
                       .bind("password", password)
                       .execute();
