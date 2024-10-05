@@ -10,7 +10,8 @@ class UsersDaoTest : public ::testing::Test {
     UsersDaoTest() {
         auto& pool = ConnectionPool::getInstance();
         pool.Intialize(10, "localhost", 33060, "abs", "1510017673");
-        usersDao = new UsersDao("snorlax_chat", "users");
+
+        usersDao = new UsersDao;
     }
 
     ~UsersDaoTest() { delete usersDao; }
@@ -48,9 +49,9 @@ TEST_F(UsersDaoTest, TestDeleteUser) {
     ASSERT_FALSE(usersDao->usernameExists("test"));
 }
 
-TEST_F(UsersDaoTest, TestSetStatus) {
+TEST_F(UsersDaoTest, TestUpdataStatus) {
     usersDao->insert("test", "test", "test@example.com");
-    usersDao->setStatus("test", UserStatus::Inactive);
+    usersDao->updataStatus("test", UserStatus::Inactive);
     ASSERT_EQ(usersDao->getStatus("test"), UserStatus::Inactive);
 }
 

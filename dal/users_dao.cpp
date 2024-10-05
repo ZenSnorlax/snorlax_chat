@@ -1,6 +1,9 @@
 #include "conn_pool.hpp"
 #include "dao.hpp"
 
+std::string UsersDao::db_name_ = "snorlax_chat";
+std::string UsersDao::table_name_ = "users";
+
 // 检查邮箱是否存在
 bool UsersDao::emailExists(const std::string &email) {
     auto session_guard =
@@ -80,7 +83,7 @@ void UsersDao::deleteuser(const std::string &username,
 }
 
 // 设置用户状态
-void UsersDao::setStatus(const std::string &username, UserStatus status) {
+void UsersDao::updataStatus(const std::string &username, UserStatus status) {
     auto session_guard =
         ConnectionGuard(ConnectionPool::getInstance().getConnection());
     auto db_schema = session_guard->getSchema(db_name_);

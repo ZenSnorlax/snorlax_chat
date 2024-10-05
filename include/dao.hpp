@@ -4,27 +4,47 @@ enum class UserStatus { Active, Inactive };
 
 class UsersDao {
    public:
-    UsersDao(const std::string &db_name, const std::string &table_name)
-        : db_name_(std::move(db_name)), table_name_(std::move(table_name)) {}
+    static bool emailExists(const std::string &email);
 
-    bool emailExists(const std::string &email);
+    static void insert(const std::string &username, const std::string &password,
+                       const std::string &email);
 
-    void insert(const std::string &username, const std::string &password,
-                const std::string &email);
+    static bool usernameExists(const std::string &username);
 
-    bool usernameExists(const std::string &username);
+    static bool match(const std::string &username, const std::string &password);
 
-    bool match(const std::string &username, const std::string &password);
+    static void deleteuser(const std::string &username,
+                           const std::string &password);
 
-    void deleteuser(const std::string &username, const std::string &password);
+    static void updataStatus(const std::string &username, UserStatus status);
 
-    void setStatus(const std::string &username, UserStatus status);
-
-    UserStatus getStatus(const std::string &username);
+    static UserStatus getStatus(const std::string &username);
 
    private:
-    const std::string db_name_;
-    const std::string table_name_;
+    static std::string db_name_;
+    static std::string table_name_;
 
-    std::string statusToString(UserStatus status);
+    static std::string statusToString(UserStatus status);
+};
+
+class ChatRoomsDao {
+   public:
+    static void insert(const std::string &room_name, int created_by);
+
+    static bool roomExists(const std::string &room_name);
+
+   private:
+    static std::string db_name_;
+    static std::string table_name_;
+};
+
+class UsersRoomRelationsDao {
+   public:
+    static void insert(int user_id, int room_id);
+
+    static bool userRoomExists(int user_id, int room_id);
+
+   private:
+    static std::string db_name_;
+    static std::string table_name_;
 };
