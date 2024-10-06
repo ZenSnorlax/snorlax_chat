@@ -52,3 +52,12 @@ class UserRoomRelationsDao {
 
     static std::string roleToString(UserRole role);
 };
+
+class MessagesDao {
+   public:
+    static void insert(int user_id, int room_id, const std::string &content);
+
+   private:
+    static std::string db_name_;
+    static std::string table_name_;
+};
