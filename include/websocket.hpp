@@ -68,6 +68,7 @@ class WebSession : public std::enable_shared_from_this<WebSession> {
     void broadcast(const std::string& message) {
         std::lock_guard<std::mutex> lock(sessions_mutex_);
         for (const auto& session : sessions_) {
+            std::cout << "Broadcast message: " << message << std::endl;
             if (session != shared_from_this()) {
                 session->send(message);
             }
