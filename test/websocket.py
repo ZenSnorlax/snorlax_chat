@@ -1,11 +1,17 @@
-import asyncio
 import websockets
+import asyncio
+
 
 async def hello():
-    uri = "ws://localhost:8080"  # 确保这里的端口与服务器一致
-    async with websockets.connect(uri) as websocket:
-        await websocket.send("Hello, Server!")
-        response = await websocket.recv()
-        print(f"Received from server: {response}")
+    async with websockets.connect("ws://127.0.0.1:8080") as websocket:  # 使用 127.0.0.1
+        name = input("What's your name? ")
 
-asyncio.run(hello())
+        await websocket.send(name)
+        print(f"> {name}")
+
+        greeting = await websocket.recv()
+        print(f"< {greeting}")
+
+
+if __name__ == "__main__":
+    asyncio.run(hello())

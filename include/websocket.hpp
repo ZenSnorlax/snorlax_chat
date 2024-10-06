@@ -20,7 +20,6 @@ class WebSession : public std::enable_shared_from_this<WebSession> {
         : ws_(std::move(socket)), sessions_(sessions), sessions_mutex_(mutex) {}
 
     void start() {
-        // 将当前会话加入会话集
         {
             std::lock_guard<std::mutex> lock(sessions_mutex_);
             sessions_.insert(shared_from_this());
@@ -46,26 +45,28 @@ class WebSession : public std::enable_shared_from_this<WebSession> {
         ws_.async_read(
             buffer_,
             [self = shared_from_this()](beast::error_code ec, std::size_t) {
-                if (ec) {
-                    std::cerr << "Read error: " << ec.message() << std::endl;
+                if (ec == websocket::error::closed) {
+                    std::cerr << "Connection closed: " << ec.message()
+                              << std::endl;
                     self->destroy();
                     return;
+                } else if (ec) {
+                    self->handle_error(ec);
+                    return;
                 }
+
                 std::string message =
                     beast::buffers_to_string(self->buffer_.data());
                 std::cout << "Received message: " << message << std::endl;
 
-                // 向所有会话广播消息
                 self->broadcast(message);
-
                 self->buffer_.consume(self->buffer_.size());
-                self->do_read();  // 继续读取下一个消息
+                self->do_read();
             });
     }
 
     void broadcast(const std::string& message) {
         std::lock_guard<std::mutex> lock(sessions_mutex_);
-
         for (const auto& session : sessions_) {
             if (session != shared_from_this()) {
                 session->send(message);
@@ -79,12 +80,16 @@ class WebSession : public std::enable_shared_from_this<WebSession> {
             [self = shared_from_this()](beast::error_code ec, std::size_t) {
                 if (ec) {
                     std::cerr << "Write error: " << ec.message() << std::endl;
-                    return;
                 }
             });
     }
+
+    void handle_error(beast::error_code ec) {
+        std::cerr << "Error: " << ec.message() << std::endl;
+        destroy();
+    }
+
     void destroy() {
-        // 当会话结束时从会话集移除
         std::lock_guard<std::mutex> lock(sessions_mutex_);
         sessions_.erase(shared_from_this());
     }
@@ -100,7 +105,7 @@ class WebSocketServer {
    private:
     tcp::acceptor acceptor_;
     std::unordered_set<std::shared_ptr<WebSession>> sessions_;
-    std::mutex sessions_mutex_;  // 用于保护会话集的互斥锁
+    std::mutex sessions_mutex_;
 
     void do_accept() {
         acceptor_.async_accept(
@@ -108,12 +113,11 @@ class WebSocketServer {
                 if (ec) {
                     std::cerr << "Accept error: " << ec.message() << std::endl;
                 } else {
-                    // 创建并启动一个新的WebSession，传递会话集和互斥锁
                     std::make_shared<WebSession>(
                         std::move(socket), sessions_, sessions_mutex_)
                         ->start();
                 }
-                do_accept();  // 接受下一个连接
+                do_accept();
             });
     }
 };
