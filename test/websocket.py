@@ -26,9 +26,7 @@ async def websocket_client():
         send_task = asyncio.create_task(send_message(websocket))
         receive_task = asyncio.create_task(receive_message(websocket))
 
-        # 等待发送和接收任务同时运行
         await asyncio.gather(send_task, receive_task)
 
 
-# 运行客户端
 asyncio.run(websocket_client())

@@ -1,5 +1,5 @@
 #include "conn_pool.hpp"
-#include "dao.hpp"
+#include "dal.hpp"
 
 std::string MessagesDao::db_name_ = "snorlax_chat";
 std::string MessagesDao::table_name_ = "messages";

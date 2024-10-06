@@ -1,5 +1,5 @@
 #include "conn_pool.hpp"
-#include "dao.hpp"
+#include "dal.hpp"
 
 void UserRoomRelationsDao::insert(int chat_room_id, int user_id,
                                   UserRole role) {
