@@ -1,3 +1,2 @@
-#include <iostream>
+#include "websocket.hpp"
 
-int main(int argc, char* argv[]) { std::cout << "Hello, from snorlax_chat!\n"; }

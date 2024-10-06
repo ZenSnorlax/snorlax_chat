@@ -20,7 +20,8 @@ bool UsersDao::emailExists(const std::string &email) {
 }
 
 // 插入新用户
-void UsersDao::insert(const std::string &username, const std::string &password,
+void UsersDao::insert(const std::string &username,
+                      const std::string &password_hash,
                       const std::string &email) {
     auto session_guard =
         ConnectionGuard(ConnectionPool::getInstance().getConnection());
@@ -31,7 +32,7 @@ void UsersDao::insert(const std::string &username, const std::string &password,
         statusToString(UserStatus::Inactive);  // 转换状态为字符串
 
     table_schema.insert("username", "password_hash", "email", "status")
-        .values(username, password, email, statusStr)
+        .values(username, password_hash, email, statusStr)
         .execute();
 }
 
@@ -51,7 +52,8 @@ bool UsersDao::usernameExists(const std::string &username) {
 }
 
 // 验证用户名和密码是否匹配
-bool UsersDao::match(const std::string &username, const std::string &password) {
+bool UsersDao::match(const std::string &username,
+                     const std::string &password_hash) {
     auto session_guard =
         ConnectionGuard(ConnectionPool::getInstance().getConnection());
     auto db_schema = session_guard->getSchema(db_name_);
@@ -61,7 +63,7 @@ bool UsersDao::match(const std::string &username, const std::string &password) {
         table_schema.select("username", "password_hash")
             .where("username = :username AND password_hash = :password")
             .bind("username", username)
-            .bind("password", password)
+            .bind("password", password_hash)
             .execute();
 
     return result.count() > 0;
@@ -69,7 +71,7 @@ bool UsersDao::match(const std::string &username, const std::string &password) {
 
 // 删除用户
 void UsersDao::deleteuser(const std::string &username,
-                          const std::string &password) {
+                          const std::string &password_hash) {
     auto session_guard =
         ConnectionGuard(ConnectionPool::getInstance().getConnection());
     auto db_schema = session_guard->getSchema(db_name_);
@@ -78,7 +80,7 @@ void UsersDao::deleteuser(const std::string &username,
     table_schema.remove()
         .where("username = :username AND password_hash = :password")
         .bind("username", username)
-        .bind("password", password)
+        .bind("password", password_hash)
         .execute();
 }
 
