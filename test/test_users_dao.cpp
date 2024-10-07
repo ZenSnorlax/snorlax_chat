@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "conn_pool.hpp"
-#include "dao.hpp"
+#include "dal.hpp"
 
 class UsersDaoTest : public ::testing::Test {
    protected:
