@@ -1,36 +1,20 @@
-/*
-#include "websocket.hpp"
+#include <boost/asio.hpp>
+#include <boost/asio/io_context.hpp>
+#include <boost/beast/core.hpp>
 
-int main() {
-    try {
-        net::io_context ioc;
-        tcp::endpoint endpoint(tcp::v4(), 8080);
-        WebSocketServer server(ioc, endpoint);
-        server.start();
-        ioc.run();
-    } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
-    }
-}
-*/
+namespace bease = boost::beast;
+namespace asio = boost::asio;
+using tcp = asio::ip::tcp;
 
-#include <iostream>
-#include <nlohmann/json.hpp>
+class SmtpClient {
+   public:
+    SmtpClient(const std::string& smtp_server, int port)
+        : smtp_server_(smtp_server), port_(port) {}
 
-int main() {
-    
-    nlohmann::json json_obj = {
-        {"username", "user123"}, {"password", "pass123"}, {"type", "login"}};
-
-    
-    std::cout << json_obj.dump() << std::endl;
-
-    
-    std::string username = json_obj["username"];
-    std::string type = json_obj["type"];
-
-    std::cout << "Username: " << username << std::endl;
-    std::cout << "Type: " << type << std::endl;
-
-    return 0;
-}
+   private:
+    const std::string& smtp_server_;
+    int port_;
+    asio::io_context ioc_;
+    tcp::socket socket_;
+    tcp::resolver resolver_;
+};
