@@ -24,16 +24,24 @@ endif()
 add_definitions(-DSTATIC_CONCPP)
 
 include_directories(/usr/include/mysql-cppconn-8)
+include_directories(include)
 
-include_directories(include)  
+# boost
+find_package(Boost REQUIRED COMPONENTS system date_time regex)
+
+# mailio
+find_package(mailio REQUIRED)
 
 add_executable(snorlax_chat ${SOURCE_FILES})
 
-set(SNORLAX_MYSQL "/usr/lib64/libmysqlcppconnx-static.a" "ssl" "crypto" "resolv" )
+set(SNORLAX_MYSQL "/usr/lib64/libmysqlcppconnx-static.a" "ssl" "crypto" "resolv")
 target_link_libraries(snorlax_chat
     ${SNORLAX_MYSQL}
+    mailio
+    Boost::system
+    Boost::date_time
+    Boost::regex
 )
-
 
 # test
 enable_testing()  
@@ -43,7 +51,6 @@ include_directories(${GTEST_INCLUDE_DIRS})
 set(TEST_FILES  test/test_connPool.cpp) 
 
 add_executable(test_connPool ${TEST_FILES}) 
-
 target_link_libraries(test_connPool
     ${GTEST_LIBRARIES}  
     pthread 
@@ -51,11 +58,20 @@ target_link_libraries(test_connPool
 )
 
 add_executable(test_users_dao test/test_users_dao.cpp dal/users_dao.cpp)
-
 target_link_libraries(test_users_dao ${SNORLAX_MYSQL} 
     ${GTEST_LIBRARIES}  
-    pthread )
+    pthread 
+)
 
+add_executable(test_register test/test_register_handler.cpp bll/register_hander.cpp dal/users_dao.cpp)
+target_link_libraries(test_register ${SNORLAX_MYSQL} 
+    ${GTEST_LIBRARIES}  
+    pthread 
+    mailio 
+    Boost::system
+    Boost::date_time
+    Boost::regex
+)
 add_test(NAME test_connPool COMMAND test_connPool)
-
-add_test(NAME test_users_dao COMMAND test_users_dao )
+add_test(NAME test_users_dao COMMAND test_users_dao)
+add_test(NAME test_register COMMAND test_register)

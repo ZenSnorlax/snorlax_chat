@@ -22,6 +22,7 @@ class UsersDao {
 
     static UserStatus getStatus(const std::string &username);
 
+
    private:
     static std::string db_name_;
     static std::string table_name_;

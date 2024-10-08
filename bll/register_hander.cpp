@@ -1,38 +1,37 @@
-#include <openssl/sha.h>
+#include <chrono>
+#include <ctime>
+#include <mailio/message.hpp>
+#include <mailio/smtp.hpp>
+#include <random>
+#include <string>
 
-#include <iomanip>
-#include <iostream>
-#include <sstream>
+#include "bll.hpp"
 
-#include "dal.hpp"
+bool RegisterHandler::sendEmailCode(const std::string& email) {
+    if (UsersDao::emailExists(email)) {
+        return false;
+    }
 
-class RegisterHandler {
-   public:
-    bool registerUser(const std::string& username, const std::string& password,
-                      const std::string& email);
-    std::string hashPassword(const std::string& password);
-    bool verifyEmail(const std::string& email, const std::string& code);
-};
+    this->code = std::to_string(generateVerificationCode());
 
-bool RegisterHandler::registerUser(const std::string& username,
-                                   const std::string& password,
-                                   const std::string& email) {
-    UsersDao::insert(username, hashPassword(password), email);
+    mailio::message msg;
+    msg.from(mailio::mail_address("snorlax", "1510017673@qq.com"));
+    msg.add_recipient(mailio::mail_address("", email));
+    msg.subject("Your verification code");
+    msg.content("Your verification code is: " + code);
+
+    mailio::smtps conn("smtp.qq.com", 587);
+    conn.authenticate("1510017673@qq.com",
+                      "zpkbzczuzdttjgci",
+                      mailio::smtps::auth_method_t::START_TLS);
+    conn.submit(msg);
+
     return true;
 }
 
-std::string RegisterHandler::hashPassword(const std::string& password) {
-    unsigned char hash[SHA256_DIGEST_LENGTH];  // SHA256_HASH_SIZE = 32
-    SHA256(reinterpret_cast<const unsigned char*>(password.c_str()),
-           password.size(),
-           hash);
-
-    std::stringstream ss;
-    for (int i = 0; i < SHA256_DIGEST_LENGTH; ++i) {
-        ss << std::hex << std::setw(2) << std::setfill('0')
-           << static_cast<int>(hash[i]);
-    }
-    return ss.str();
+int RegisterHandler::generateVerificationCode() {
+    std::mt19937 generator(static_cast<unsigned int>(
+        std::chrono::system_clock::now().time_since_epoch().count()));
+    std::uniform_int_distribution<int> distribution(100000, 999999);
+    return distribution(generator);
 }
-
-
