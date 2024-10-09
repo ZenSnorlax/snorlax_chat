@@ -1,33 +1,29 @@
+#include <bcrypt.h>
+
 #include <chrono>
 #include <ctime>
 #include <mailio/message.hpp>
 #include <mailio/smtp.hpp>
 #include <random>
+#include <regex>
 #include <string>
 
 #include "bll.hpp"
 
 ErrorCode RegisterHandler::sendEmailCode(const std::string& email) {
-    // 检查邮箱是否存在
     if (UsersDao::emailExists(email)) {
         return ErrorCode::EmailExists;
     }
 
-    // 生成验证码
     this->code = std::to_string(generateVerificationCode());
 
-    // 创建邮件内容
     mailio::message msg;
-    msg.from(mailio::mail_address(
-        "snorlax", "1510017673@qq.com"));  // 可以替换为配置文件中的值
+    msg.from(mailio::mail_address("snorlax", "1510017673@qq.com"));
     msg.add_recipient(mailio::mail_address("", email));
     msg.subject("Your verification code");
     msg.content("Your verification code is: " + code);
 
-    // 连接并发送邮件
     mailio::smtps conn("smtp.qq.com", 587);
-
-    // 进行身份认证
 
     try {
         conn.authenticate("1510017673@qq.com",
@@ -37,7 +33,6 @@ ErrorCode RegisterHandler::sendEmailCode(const std::string& email) {
         return ErrorCode::SmtpError;
     }
 
-    // 提交邮件
     try {
         conn.submit(msg);
     } catch (...) {
@@ -51,6 +46,13 @@ ErrorCode RegisterHandler::registerUser(const std::string& username,
                                         const std::string& password,
                                         const std::string& email,
                                         const std::string& code) {
+    if (!std::regex_match(username, std::regex("[a-zA-Z0-9]{4,16}"))) {
+        return ErrorCode::UsernameFormatError;
+    }
+    if (!std::regex_match(password, std::regex("[a-zA-Z0-9]{6,16}"))) {
+        return ErrorCode::PasswordFormatError;
+    }
+
     if (code != this->code) {
         return ErrorCode::CodeError;
     }
@@ -59,8 +61,10 @@ ErrorCode RegisterHandler::registerUser(const std::string& username,
         return ErrorCode::UsernameExists;
     }
 
+    std::string psw_hash = bcrypt::generateHash(password);
+
     try {
-        UsersDao::insert(username, password, email);
+        UsersDao::insert(username, psw_hash, email);
     } catch (...) {
         return ErrorCode::UnknownError;
     }

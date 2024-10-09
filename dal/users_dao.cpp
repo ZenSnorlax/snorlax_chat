@@ -132,3 +132,32 @@ std::string UsersDao::statusToString(UserStatus status) {
             return "unknown";  // 处理未定义状态
     }
 }
+std::string UsersDao::getPasswordHash(const std::string &username) {
+    auto session_guard =
+        ConnectionGuard(ConnectionPool::getInstance().getConnection());
+    auto db_schema = session_guard->getSchema(db_name_);
+    auto table_schema = db_schema.getTable(table_name_);
+
+    auto result = table_schema.select("password_hash")
+                      .where("username = :username")
+                      .bind("username", username)
+                      .execute();
+
+    auto row = result.fetchOne();
+    return row[0].get<std::string>();
+}
+
+int UsersDao::getUserId(const std::string &username) {
+    auto session_guard =
+        ConnectionGuard(ConnectionPool::getInstance().getConnection());
+    auto db_schema = session_guard->getSchema(db_name_);
+    auto table_schema = db_schema.getTable(table_name_);
+
+    auto result = table_schema.select("id")
+                      .where("username = :username")
+                      .bind("username", username)
+                      .execute();
+
+    auto row = result.fetchOne();
+    return row[0].get<int>();
+}

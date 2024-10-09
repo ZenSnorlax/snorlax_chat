@@ -8,7 +8,13 @@ enum class ErrorCode {
     CodeError = 4,
     UnknownError = 5,
     AuthError = 6,
-    SmtpError = 7
+    SmtpError = 7,
+    UsernameFormatError = 8,
+    PasswordFormatError = 9,
+    UsernameNotExists = 10,
+    RoomExists = 11,
+    RoomnameFormatError = 12,
+    RoomNotExists = 13,
 };
 
 class RegisterHandler {
@@ -23,4 +29,24 @@ class RegisterHandler {
    private:
     std::string code;
     int generateVerificationCode();
+};
+
+class LoginHandler {
+   public:
+    LoginHandler() {}
+    ErrorCode login(const std::string& username, const std::string& password);
+
+   private:
+};
+
+class ChatroomHandler {
+   public:
+    ChatroomHandler() {}
+    ErrorCode joinChatroom(const std::string& username,
+                           const std::string& password,
+                           const std::string& room_name);
+
+    ErrorCode createChatroom(const std::string& username,
+                             const std::string& password,
+                             const std::string& room_name);
 };

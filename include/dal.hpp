@@ -20,8 +20,11 @@ class UsersDao {
 
     static void updataStatus(const std::string &username, UserStatus status);
 
+    static std::string getPasswordHash(const std::string &username);
+
     static UserStatus getStatus(const std::string &username);
 
+    static int getUserId(const std::string &username);
 
    private:
     static std::string db_name_;
@@ -35,6 +38,8 @@ class ChatRoomsDao {
     static void insert(const std::string &room_name, int created_by);
 
     static bool roomExists(const std::string &room_name);
+
+    static int getRoomId(const std::string &room_name);
 
    private:
     static std::string db_name_;

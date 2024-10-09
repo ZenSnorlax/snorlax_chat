@@ -32,6 +32,11 @@ find_package(Boost REQUIRED COMPONENTS system date_time regex)
 # mailio
 find_package(mailio REQUIRED)
 
+# bcrypt
+include_directories(/usr/local/include)  # 头文件路径
+link_directories(/usr/local/lib)          # 库文件路径
+
+
 add_executable(snorlax_chat ${SOURCE_FILES})
 
 set(SNORLAX_MYSQL "/usr/lib64/libmysqlcppconnx-static.a" "ssl" "crypto" "resolv")
@@ -41,7 +46,10 @@ target_link_libraries(snorlax_chat
     Boost::system
     Boost::date_time
     Boost::regex
+    bcrypt
 )
+
+
 
 # test
 enable_testing()  
