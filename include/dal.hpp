@@ -1,4 +1,5 @@
 #include <string>
+#include <vector>
 
 enum class UserStatus { Active, Inactive };
 
@@ -25,6 +26,10 @@ class UsersDao {
     static UserStatus getStatus(const std::string &username);
 
     static int getUserId(const std::string &username);
+
+    static void setLoginTime(const std::string &username);
+
+    static std::string getLoginTime(const std::string &username);
 
    private:
     static std::string db_name_;
@@ -62,6 +67,8 @@ class UserRoomRelationsDao {
 class MessagesDao {
    public:
     static void insert(int user_id, int room_id, const std::string &content);
+    static std::vector<std::string> getMessages(std::string username,
+                                                const std::string &login_time);
 
    private:
     static std::string db_name_;

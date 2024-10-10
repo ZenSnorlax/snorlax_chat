@@ -1,5 +1,7 @@
-#include "dal.hpp"
+#include <string>
+#include <vector>
 
+#include "dal.hpp"
 enum class ErrorCode {
     Success = 0,
     EmailExists = 1,
@@ -26,6 +28,8 @@ class RegisterHandler {
                            const std::string& password,
                            const std::string& email, const std::string& code);
 
+    std::string getCode() { return code; }
+
    private:
     std::string code;
     int generateVerificationCode();
@@ -37,6 +41,8 @@ class LoginHandler {
     ErrorCode login(const std::string& username, const std::string& password);
 
    private:
+    std::vector<std ::string> getMissingMessage();
+    std::string username_;
 };
 
 class ChatroomHandler {
@@ -49,4 +55,12 @@ class ChatroomHandler {
     ErrorCode createChatroom(const std::string& username,
                              const std::string& password,
                              const std::string& room_name);
+};
+
+class MessageHanlder {
+   public:
+    MessageHanlder() {}
+    ErrorCode addMessage(const std::string& username,
+                         const std::string& room_name,
+                         const std::string& content);
 };

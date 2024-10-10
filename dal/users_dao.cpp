@@ -161,3 +161,31 @@ int UsersDao::getUserId(const std::string &username) {
     auto row = result.fetchOne();
     return row[0].get<int>();
 }
+
+void UsersDao::setLoginTime(const std::string &username) {
+    auto session_guard =
+        ConnectionGuard(ConnectionPool::getInstance().getConnection());
+    auto db_schema = session_guard->getSchema(db_name_);
+    auto table_schema = db_schema.getTable(table_name_);
+
+    table_schema.update()
+        .set("last_login", mysqlx::expr("now()"))
+        .where("username = :username")
+        .bind("username", username)
+        .execute();
+}
+
+std::string UsersDao::getLoginTime(const std::string &username) {
+    auto session_guard =
+        ConnectionGuard(ConnectionPool::getInstance().getConnection());
+    auto db_schema = session_guard->getSchema(db_name_);
+    auto table_schema = db_schema.getTable(table_name_);
+
+    auto result = table_schema.select("last_login")
+                      .where("username = :username")
+                      .bind("username", username)
+                      .execute();
+
+    auto row = result.fetchOne();
+    return row[0].get<std::string>();
+}

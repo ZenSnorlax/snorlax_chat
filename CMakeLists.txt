@@ -49,37 +49,29 @@ target_link_libraries(snorlax_chat
     bcrypt
 )
 
-
-
 # test
 enable_testing()  
 find_package(GTest REQUIRED)  
 include_directories(${GTEST_INCLUDE_DIRS})  
 
-set(TEST_FILES  test/test_connPool.cpp) 
 
-add_executable(test_connPool ${TEST_FILES}) 
-target_link_libraries(test_connPool
-    ${GTEST_LIBRARIES}  
-    pthread 
-    ${SNORLAX_MYSQL}    
-)
-
-add_executable(test_users_dao test/test_users_dao.cpp dal/users_dao.cpp)
-target_link_libraries(test_users_dao ${SNORLAX_MYSQL} 
+add_executable(test_dao test/dao.cpp dal/users_dao.cpp)
+target_link_libraries(test_dao ${SNORLAX_MYSQL} 
     ${GTEST_LIBRARIES}  
     pthread 
 )
 
-add_executable(test_register test/test_register_handler.cpp bll/register_hander.cpp dal/users_dao.cpp)
-target_link_libraries(test_register ${SNORLAX_MYSQL} 
+add_executable(test_bll test/bll.cpp bll/register_handler.cpp dal/users_dao.cpp)
+target_link_libraries(test_bll ${SNORLAX_MYSQL} 
     ${GTEST_LIBRARIES}  
     pthread 
     mailio 
     Boost::system
     Boost::date_time
     Boost::regex
+    bcrypt
 )
-add_test(NAME test_connPool COMMAND test_connPool)
-add_test(NAME test_users_dao COMMAND test_users_dao)
-add_test(NAME test_register COMMAND test_register)
+
+add_test(NAME test_users_dao COMMAND test_dao)  # 这里修改为 test_dao
+
+add_test(NAME test_register COMMAND test_bll)  # 这里修改为 test_bll

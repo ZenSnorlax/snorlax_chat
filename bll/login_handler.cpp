@@ -15,8 +15,19 @@ ErrorCode LoginHandler::login(const std::string& username,
     }
 
     if (bcrypt::validatePassword(password, password_hash)) {
+        this->username_ = username;
         return ErrorCode::Success;
     } else {
         return ErrorCode::PasswordError;
     }
+}
+
+std::vector<std::string> LoginHandler::getMissingMessage() {
+    std::vector<std::string> messages;
+
+    std::string login_time = UsersDao::getLoginTime(username_);
+
+    if (login_time.empty()) return {};
+
+    return MessagesDao::getMessages(username_, login_time);
 }

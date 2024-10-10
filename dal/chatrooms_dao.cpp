@@ -28,3 +28,18 @@ bool ChatRoomsDao::roomExists(const std::string& room_name) {
 
     return result.count() > 0;
 }
+
+int ChatRoomsDao::getRoomId(const std::string& room_name) {
+    auto session_guard =
+        ConnectionGuard(ConnectionPool::getInstance().getConnection());
+    auto db_schema = session_guard->getSchema(db_name_);
+    auto table_schema = db_schema.getTable("chat_rooms");
+
+    auto result = table_schema.select("room_id")
+                      .where("room_name = :room_name")
+                      .bind("room_name", room_name)
+                      .execute();
+
+    auto row = result.fetchOne();
+    return row[0].get<int>();
+}
