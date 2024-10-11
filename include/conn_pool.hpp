@@ -22,7 +22,7 @@ class ConnectionPool {
         for (size_t i = 0; i < capacity_; ++i) {
             queue_.emplace(new mysqlx::Session(host, port, user, passwd));
         }
-        LOG(Level::INFO, "Initialize connection pool successfully");
+        LOG(Level::DEBUG, "Initialize connection pool successfully");
     }
 
     // Get a connection from the pool
@@ -33,7 +33,7 @@ class ConnectionPool {
         mysqlx::Session *conn = queue_.front();
         queue_.pop();
 
-        LOG(Level::INFO,
+        LOG(Level::DEBUG,
             std::this_thread::get_id(),
             " Get a connection from the pool");
 
@@ -47,7 +47,7 @@ class ConnectionPool {
             queue_.push(conn);
         }
 
-        LOG(Level::INFO,
+        LOG(Level::DEBUG,
             std::this_thread::get_id(),
             " Release a connection back to the pool");
 
@@ -73,7 +73,7 @@ class ConnectionPool {
             queue_.pop();
         }
 
-        LOG(Level::INFO, "Destroy connection pool successfully");
+        LOG(Level::DEBUG, "Destroy connection pool successfully");
     }
 };
 

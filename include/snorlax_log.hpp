@@ -57,7 +57,7 @@ class SnorlaxLog {
     std::thread consume_thread_;
     bool is_exit_;
 
-    SnorlaxLog(Level level = Level::DEBUG, std::ostream &out = std::cout)
+    SnorlaxLog(Level level = Level::INFO, std::ostream &out = std::cout)
         : current_level_(level), output_stream_(&out), is_exit_(false) {
         consume_thread_ = std::thread(&SnorlaxLog::consume, this);
     }

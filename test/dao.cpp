@@ -55,6 +55,22 @@ TEST_F(UsersDaoTest, TestUpdataStatus) {
     ASSERT_EQ(usersDao->getStatus("test"), UserStatus::Inactive);
 }
 
+TEST(MessageDaoTest, TestInsert) {
+    auto& pool = ConnectionPool::getInstance();
+    pool.Intialize(10, "localhost", 33060, "abs", "1510017673");
+
+    UsersDao::insert("test", "test", "test@example.com");
+    ChatRoomsDao::insert("test", UsersDao::getUserId("test"));
+
+    UserRoomRelationsDao::insert(ChatRoomsDao::getRoomId("test"),
+                                 UsersDao::getUserId("test"),
+                                 UserRole::member);
+
+    MessagesDao::insert(UsersDao::getUserId("test"),
+                        ChatRoomsDao::getRoomId("test"),
+                        "test message");
+}
+
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

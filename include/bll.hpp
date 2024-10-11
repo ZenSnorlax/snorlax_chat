@@ -39,9 +39,9 @@ class LoginHandler {
    public:
     LoginHandler() {}
     ErrorCode login(const std::string& username, const std::string& password);
+    std::vector<std ::string> getMissingMessage();
 
    private:
-    std::vector<std ::string> getMissingMessage();
     std::string username_;
 };
 

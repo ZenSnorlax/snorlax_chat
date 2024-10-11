@@ -1,12 +1,11 @@
+#include "bll.hpp"
+
 #include <bcrypt.h>
 #include <gtest/gtest.h>
 
-#include "bll.hpp"
 #include "conn_pool.hpp"
 
 TEST(RegisterHandler, sendEmailCode) {
-    auto& pool = ConnectionPool::getInstance();
-    pool.Intialize(10, "localhost", 33060, "abs", "1510017673");
     RegisterHandler handler;
 
     EXPECT_EQ(handler.sendEmailCode("q1510017673@outlook.com"),
@@ -14,8 +13,6 @@ TEST(RegisterHandler, sendEmailCode) {
 }
 
 TEST(RegisterHandler, registerUser) {
-    auto& pool = ConnectionPool::getInstance();
-    pool.Intialize(10, "localhost", 33060, "abs", "1510017673");
     RegisterHandler handler;
     handler.sendEmailCode("q1510017673@outlook.com");
 
@@ -27,7 +24,17 @@ TEST(RegisterHandler, registerUser) {
               ErrorCode::Success);
 }
 
+TEST(LoginHandler, Login) {
+    LoginHandler handler;
+    EXPECT_EQ(handler.login("snorlax", "1510017673"), ErrorCode::Success);
+}
+
+TEST(LoginHandler, getMissingMessage) {}
+
+
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
+    auto& pool = ConnectionPool::getInstance();
+    pool.Intialize(10, "localhost", 33060, "abs", "1510017673");
     return RUN_ALL_TESTS();
 }
