@@ -31,6 +31,15 @@ TEST(LoginHandler, Login) {
 
 TEST(LoginHandler, getMissingMessage) {}
 
+TEST(MessageHanlder, addMessage) {
+    MessageHanlder handler;
+
+    UsersDao::insert("test", "test", "test@example.com");
+    ChatRoomsDao::insert("test", UsersDao::getUserId("test"));
+    
+    EXPECT_EQ(handler.addMessage("test", "test", "test message"),
+              ErrorCode::Success);
+}
 
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);

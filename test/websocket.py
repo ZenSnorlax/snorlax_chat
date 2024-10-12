@@ -28,5 +28,4 @@ async def websocket_client():
 
         await asyncio.gather(send_task, receive_task)
 
-
 asyncio.run(websocket_client())

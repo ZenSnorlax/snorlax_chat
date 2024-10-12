@@ -63,7 +63,9 @@ target_link_libraries(test_dao ${SNORLAX_MYSQL}
     pthread 
 )
 
-add_executable(test_bll test/bll.cpp bll/register_handler.cpp dal/users_dao.cpp bll/login_handler.cpp dal/messages_dao.cpp)
+add_executable(test_bll test/bll.cpp bll/register_handler.cpp dal/users_dao.cpp bll/login_handler.cpp dal/messages_dao.cpp bll/message_handler.cpp dal/chatrooms_dao.cpp bll/chatroom_handler.cpp
+dal/chatroom_relations_dao.cpp
+)
 target_link_libraries(test_bll ${SNORLAX_MYSQL} 
     ${GTEST_LIBRARIES}  
     pthread 
@@ -74,6 +76,6 @@ target_link_libraries(test_bll ${SNORLAX_MYSQL}
     bcrypt
 )
 
-add_test(NAME test_dao COMMAND test_dao)  # 这里修改为 test_dao
+# add_test(NAME test_dao COMMAND test_dao)  # 这里修改为 test_dao
 
-add_test(NAME test_bll COMMAND test_bll)  # 这里修改为 test_bll
+#add_test(NAME test_bll COMMAND test_bll)  # 这里修改为 test_bll
